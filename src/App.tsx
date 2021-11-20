@@ -136,6 +136,7 @@ function App() {
               element={<PowerConsumptionPerDayChart data={monthData} />}
             />
             <Route path="flowless/challenges" element={<ChallengesPage />} />
+            <Route path="flowless/spend" element={<div>( ͡° ͜ʖ ͡°)</div>} />
           </Routes>
         </BrowserRouter>
       </ChakraProvider>
