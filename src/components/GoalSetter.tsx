@@ -131,7 +131,10 @@ export const GoalSetter = ({ data }: { data: DataSet }) => {
               <Select
                 name="monthlyGoalType"
                 value={values.monthlyGoalType}
-                onChange={handleChange}
+                onChange={(values: any) => {
+                  setNewGoalSet(false);
+                  handleChange(values);
+                }}
                 onBlur={handleBlur}
                 style={{ backgroundColor: "white" }}
               >
@@ -183,7 +186,9 @@ export const GoalSetter = ({ data }: { data: DataSet }) => {
             )}
 
             {newGoalSet && values.monthlyGoalType === GoalType.Money && (
-              <div>You should use ~{litersGoal} liters to hit your budget goal!</div>
+              <div>
+                You should use ~{litersGoal} liters to hit your budget goal!
+              </div>
             )}
           </Form>
         )}
