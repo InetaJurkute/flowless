@@ -10,7 +10,7 @@ import { sumBy } from "lodash";
 import { useContext } from "react";
 import GoalContext from "../context/GoalContext";
 
-enum GoalType {
+export enum GoalType {
   Liters = "Liters",
   Money = "Money",
 }
@@ -69,22 +69,25 @@ const getForecastedMoney = (values: MonthlyGoal, data: DataSet) => {
 };
 
 export const GoalSetter = ({ data }: { data: DataSet }) => {
-  const { setGoal } = useContext(GoalContext);
+  const { setLitersGoal, setMoneyGoal } = useContext(GoalContext);
 
   const handleSubmit = (values: MonthlyGoal, {}) => {
     if (values.monthlyGoalType === GoalType.Liters) {
       localStorage.setItem(GoalType.Liters, values.monthlyGoalAmount);
-      setGoal(values.monthlyGoalAmount);
-
+      setLitersGoal(values.monthlyGoalAmount);
       const forecastedMoney = getForecastedMoney(values, data);
+      localStorage.setItem(GoalType.Money, forecastedMoney.toFixed(2));
+      setMoneyGoal(forecastedMoney.toFixed(2));
       console.log("TOTAL PRICE, forecastedMoney", forecastedMoney); // TODO USE
     } else {
+      localStorage.setItem(GoalType.Money, values.monthlyGoalAmount.toString());
+      setMoneyGoal(values.monthlyGoalAmount.toString());
       //do magic
 
       // TODO
       const litersFromMoney = Math.random();
       localStorage.setItem(GoalType.Liters, litersFromMoney.toString());
-      setGoal(litersFromMoney.toString());
+      setLitersGoal(litersFromMoney.toString());
     }
   };
 
