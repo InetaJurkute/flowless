@@ -15,7 +15,7 @@ interface MonthlyGoal {
 export const GoalSetter = ({ data }: { data: DataSet }) => {
   const handleSubmit = (values: MonthlyGoal, {}) => {
     console.log("calculate matching goal", values);
-    if (values.monthlyGoalAmount === "Liters") {
+    if (values.monthlyGoalType === "Liters") {
       localStorage.setItem("Liters", values.monthlyGoalAmount);
     } else {
       //do magic
