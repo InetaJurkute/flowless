@@ -7,7 +7,7 @@ import {
 } from "../context/DataContext";
 import { Form, Formik, Field, ErrorMessage } from "formik";
 import { sumBy } from "lodash";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import GoalContext from "../context/GoalContext";
 
 export enum GoalType {
@@ -69,7 +69,7 @@ const getForecastedMoney = (values: MonthlyGoal, data: DataSet) => {
 };
 
 export const GoalSetter = ({ data }: { data: DataSet }) => {
-  const { setLitersGoal, setMoneyGoal } = useContext(GoalContext);
+  const { setLitersGoal, moneyGoal, setMoneyGoal } = useContext(GoalContext);
 
   const handleSubmit = (values: MonthlyGoal, {}) => {
     if (values.monthlyGoalType === GoalType.Liters) {
@@ -78,7 +78,6 @@ export const GoalSetter = ({ data }: { data: DataSet }) => {
       const forecastedMoney = getForecastedMoney(values, data);
       localStorage.setItem(GoalType.Money, forecastedMoney.toFixed(2));
       setMoneyGoal(forecastedMoney.toFixed(2));
-      console.log("TOTAL PRICE, forecastedMoney", forecastedMoney); // TODO USE
     } else {
       localStorage.setItem(GoalType.Money, values.monthlyGoalAmount.toString());
       setMoneyGoal(values.monthlyGoalAmount.toString());
@@ -131,6 +130,12 @@ export const GoalSetter = ({ data }: { data: DataSet }) => {
           </Form>
         )}
       </Formik>
+
+      {moneyGoal && (
+        <div>
+          You will spend ~{moneyGoal} EU on water if you stick to your goal!
+        </div>
+      )}
     </div>
   );
 };
