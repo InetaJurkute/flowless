@@ -9,6 +9,7 @@ interface SpendCardProps {
   icon?: React.ReactNode;
   textColor?: string;
   bgColor?: string;
+  onClick?: () => any;
 }
 
 export const SpendCard = ({
@@ -19,6 +20,7 @@ export const SpendCard = ({
   icon,
   textColor,
   bgColor,
+  onClick,
 }: SpendCardProps) => {
   return (
     <Flex
@@ -30,6 +32,7 @@ export const SpendCard = ({
       bg={bgColor || mediumGrayColor}
       color={textColor || blueColor}
       padding="16px"
+      onClick={onClick}
     >
       <Box>
         {icon && icon}
