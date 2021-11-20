@@ -24,7 +24,7 @@ export const Dashboard = ({
   const navigate = useNavigate();
   return (
     <>
-      <MenuBar/>
+      <MenuBar />
       <GoalSetter data={data} />
       <Heading textAlign="left" as="h1" size="xl" marginBottom="32px">
         Welcome, <br />
