@@ -12,12 +12,16 @@ function App() {
   return (
     <ChakraProvider>
       <div className="App">
-        <TotalUsageByDeviceChart data={data} />
-        <Box
-          w="100%"
-          h="200px"
-          bgGradient="linear(to-r, green.200, pink.500)"
-        />
+        <Box w="100%" padding="20px">
+          <Box margin="32px 0">
+            <TotalUsageByDeviceChart data={data} />
+          </Box>
+          <Box
+            w="100%"
+            h="200px"
+            bgGradient="linear(to-r, green.200, pink.500)"
+          />
+        </Box>
       </div>
     </ChakraProvider>
   );

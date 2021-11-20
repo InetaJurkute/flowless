@@ -35,16 +35,16 @@ export const TotalUsageByDeviceChart = ({
   const radarChartData = getTotalUsageByDeiceData;
 
   return (
-    <div style={{ height: 500 }}>
+    <div className="responsive-chart-wrapper">
       <h3>Total Consumption By Device</h3>
       <ResponsiveRadar
         data={radarChartData}
         keys={["total"]}
         indexBy="device"
         valueFormat=">-.2f"
-        margin={{ top: 70, right: 80, bottom: 40, left: 80 }}
+        margin={{ top: 60, right: 80, bottom: 60, left: 80 }}
         borderColor={{ from: "color" }}
-        gridLabelOffset={36}
+        gridLabelOffset={24}
         dotSize={10}
         dotColor={{ theme: "background" }}
         dotBorderWidth={2}
@@ -53,10 +53,10 @@ export const TotalUsageByDeviceChart = ({
         motionConfig="wobbly"
         legends={[
           {
-            anchor: "top-left",
+            anchor: "bottom",
             direction: "column",
             translateX: -50,
-            translateY: -40,
+            translateY: -60,
             itemWidth: 80,
             itemHeight: 20,
             itemTextColor: "#999",
