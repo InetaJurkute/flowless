@@ -1,10 +1,13 @@
 import { Box, Heading, Text, Flex, Spacer } from "@chakra-ui/layout";
+import { useContext } from "react";
+import GoalContext from "../context/GoalContext";
 
 interface SpendCardProps {
   amount: number;
 }
 
 export const SpendCard = ({ amount }: SpendCardProps) => {
+  const { goal } = useContext(GoalContext);
   return (
     <Flex maxW="md" borderWidth="1px" borderRadius="lg" overflow="hidden">
       <Box p="4" bg="red.400">
@@ -19,15 +22,9 @@ export const SpendCard = ({ amount }: SpendCardProps) => {
       <Spacer />
       <Box p="4" bg="green.400">
         <Heading as="h3" size="lg">
-          {localStorage.getItem("Liters") ? (
-            <>Under {localStorage.getItem("Liters")}L</>
-          ) : (
-            <>No goal set</>
-          )}
+          {goal ? <>Under {goal}L</> : <>No goal set</>}
         </Heading>
-        {localStorage.getItem("Liters") && (
-          <Text fontSize="sm"> which is your set goal</Text>
-        )}
+        {goal && <Text fontSize="sm"> which is your set goal</Text>}
       </Box>
     </Flex>
   );
