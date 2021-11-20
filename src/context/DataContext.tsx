@@ -1,7 +1,7 @@
 import { createContext } from "react";
 import data from "./db.json";
 
-export const currentDate = "2020-11-15";
+export const currentDate = DateTime.
 export const currentDateTime = "2020-11-15T16:00:41"
 
 export interface Measurement {
