@@ -20,6 +20,7 @@ export enum KitchenApplience {
 }
 
 export interface ApartmentData {
+  [index: string]: any;
   people: string;
   [KitchenApplience.Shower]: { measurements: Measurement[] };
   [KitchenApplience.KitchenFaucet]: { measurements: Measurement[] };

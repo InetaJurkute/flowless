@@ -1,14 +1,18 @@
-import data from "./context/db.json";
 import { ResponsiveRadar } from "@nivo/radar";
 import { useMemo } from "react";
 import { sumBy } from "lodash";
+import { DataSet, Measurement } from "./context/DataContext";
 
-export const TotalUsageByDeviceChart = () => {
-  console.log("data stuff", (data as any).houses.length);
+interface TotalUsageByDeviceChartProps {
+  data: DataSet;
+}
 
+export const TotalUsageByDeviceChart = ({
+  data,
+}: TotalUsageByDeviceChartProps) => {
   const getTotalUsageByDeiceData = useMemo(() => {
     //USE THE FIRST ONE
-    const myApartmentData = (data as any).houses[0].apartments[0];
+    const myApartmentData = data.houses[0].apartments[0];
 
     const devices = [
       "Hydractiva_shower",
@@ -21,21 +25,20 @@ export const TotalUsageByDeviceChart = () => {
     const summedData = devices.map((device) => ({
       device,
       total: sumBy(myApartmentData[device].measurements, (x) =>
-        parseFloat((x as any).Consumption)
+        parseFloat((x as Measurement).Consumption)
       ),
     }));
 
     return summedData;
   }, []); // update dependencies
 
-  const mockData = getTotalUsageByDeiceData as any;
-  console.log("MOCK", mockData);
+  const radarChartData = getTotalUsageByDeiceData;
 
   return (
     <div style={{ height: 500 }}>
       <h3>Total Consumption By Device</h3>
       <ResponsiveRadar
-        data={mockData}
+        data={radarChartData}
         keys={["total"]}
         indexBy="device"
         valueFormat=">-.2f"
