@@ -1,8 +1,8 @@
 import { createContext } from "react";
 import data from "./db.json";
+import {DateTime} from "luxon";
 
-export const currentDate = DateTime.
-export const currentDateTime = "2020-11-15T16:00:41"
+export const currentDate = DateTime.now().minus({years: 1});
 
 export interface Measurement {
   Consumption: string;
@@ -43,11 +43,11 @@ const filteredDataSet: DataSet = {houses: [{apartments: []}]};
 dataSet.houses[0].apartments.forEach(a => {
     filteredDataSet.houses[0].apartments.push({
         ...a,
-        [KitchenApplience.Shower]: {measurements: a[KitchenApplience.Shower].measurements.filter(m => m.TimeStamp < currentDateTime)},
-        [KitchenApplience.KitchenFaucet]: {measurements: a[KitchenApplience.KitchenFaucet].measurements.filter(m => m.TimeStamp < currentDateTime)},
-        [KitchenApplience.Faucet]: {measurements: a[KitchenApplience.Faucet].measurements.filter(m => m.TimeStamp < currentDateTime)},
-        [KitchenApplience.Dishwasher]: {measurements: a[KitchenApplience.Dishwasher].measurements.filter(m => m.TimeStamp < currentDateTime)},
-        [KitchenApplience.WashingMachine]: {measurements: a[KitchenApplience.WashingMachine].measurements.filter(m => m.TimeStamp < currentDateTime)}
+        [KitchenApplience.Shower]: {measurements: a[KitchenApplience.Shower].measurements.filter(m => m.TimeStamp < currentDate.toString())},
+        [KitchenApplience.KitchenFaucet]: {measurements: a[KitchenApplience.KitchenFaucet].measurements.filter(m => m.TimeStamp < currentDate.toString())},
+        [KitchenApplience.Faucet]: {measurements: a[KitchenApplience.Faucet].measurements.filter(m => m.TimeStamp < currentDate.toString())},
+        [KitchenApplience.Dishwasher]: {measurements: a[KitchenApplience.Dishwasher].measurements.filter(m => m.TimeStamp < currentDate.toString())},
+        [KitchenApplience.WashingMachine]: {measurements: a[KitchenApplience.WashingMachine].measurements.filter(m => m.TimeStamp < currentDate.toString())}
     })
 })
 
