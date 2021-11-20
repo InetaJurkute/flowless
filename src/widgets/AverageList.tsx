@@ -1,15 +1,17 @@
-import { Appliance } from "../context/DataContext";
+import { ApplianceLabel } from "../applianceLabel";
+
+export interface AverageSpend {
+  [ApplianceLabel.Dishwasher]: number;
+  [ApplianceLabel.Faucet]: number;
+  [ApplianceLabel.KitchenFaucet]: number;
+  [ApplianceLabel.Shower]: number;
+  [ApplianceLabel.WashingMachine]: number;
+  Total: number;
+}
 
 const AverageList = (props: {
-  monthlySpend: { total: number; device: Appliance }[];
-  averageSpend: {
-    [Appliance.Dishwasher]: number;
-    [Appliance.Faucet]: number;
-    [Appliance.KitchenFaucet]: number;
-    [Appliance.Shower]: number;
-    [Appliance.WashingMachine]: number;
-    Total: number;
-  };
+  monthlySpend: { total: number; device: ApplianceLabel }[];
+  averageSpend: AverageSpend;
   totalSpend: number;
   peopleCount: number;
 }) => {
