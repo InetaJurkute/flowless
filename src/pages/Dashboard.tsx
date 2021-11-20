@@ -8,7 +8,7 @@ import { MenuBar } from "../components/MenuBar";
 import { DataSet } from "../context/DataContext";
 import GoalContext from "../context/GoalContext";
 import { blueColor, mediumGrayColor } from "../theme/colors";
-import { TotalUsageByDeviceChart } from "../TotalUsageByDeviceChart";
+import { AppliancePie } from "../charts/AppliancePie";
 import { SpendCard } from "../widgets/SpendCard";
 
 export const Dashboard = ({
@@ -36,7 +36,8 @@ export const Dashboard = ({
         </Heading>
         <div className="dashboard-wrapper">
           <div className="flex-bigger">
-            <TotalUsageByDeviceChart data={getTotalUsageByDeiceData} />
+            {/* <TotalUsageByDeviceChart data={getTotalUsageByDeiceData} /> */}
+            <AppliancePie data={getTotalUsageByDeiceData} />
             <GithubContributionsChart data={data} />
           </div>
           <div className="flex-small">
