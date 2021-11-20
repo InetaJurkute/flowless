@@ -187,7 +187,7 @@ export const GoalSetter = ({ data }: { data: DataSet }) => {
 
             {newGoalSet && values.monthlyGoalType === GoalType.Money && (
               <div>
-                You should use ~{litersGoal} liters to hit your budget goal!
+                You should use less than ~{litersGoal} liters to hit your budget goal!
               </div>
             )}
           </Form>
