@@ -75,9 +75,32 @@ function App() {
     return summedData;
   }, [data.houses]);
 
+  const getTotalPowerUsageByDeiceData = useMemo(() => {
+    //USE THE FIRST ONE
+    const myApartmentData = data.houses[0].apartments[0];
+
+    const summedData = Object.values(Appliance).map((device) => {
+      const myMeasurements = myApartmentData[device].measurements.filter(
+        (m) => m.TimeStamp >= currentMonth.toString()
+      );
+      return {
+        device: labelMap.get(device)!,
+        total: sumBy(myMeasurements, (x) =>
+          parseFloat((x as Measurement).Power_Consumption)
+        ),
+      };
+    });
+
+    return summedData;
+  }, [data.houses]);
+
   const getTotalConsumption = useMemo(() => {
     return Math.floor(sumBy(getTotalUsageByDeiceData, (x) => x.total));
   }, [getTotalUsageByDeiceData]);
+
+  const getTotalPowerConsumption = useMemo(() => {
+    return Math.floor(sumBy(getTotalPowerUsageByDeiceData, (x) => x.total));
+  }, [getTotalPowerUsageByDeiceData]);
 
   return (
     <GoalContext.Provider
@@ -92,6 +115,7 @@ function App() {
                 <Dashboard
                   data={data}
                   getTotalConsumption={getTotalConsumption}
+                  getTotalPowerConsumption={getTotalPowerConsumption}
                   getTotalUsageByDeiceData={getTotalUsageByDeiceData}
                 />
               }

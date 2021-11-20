@@ -14,10 +14,12 @@ import { SpendCard } from "../widgets/SpendCard";
 export const Dashboard = ({
   data,
   getTotalUsageByDeiceData,
+  getTotalPowerConsumption,
   getTotalConsumption,
 }: {
   data: DataSet;
   getTotalUsageByDeiceData: any;
+  getTotalPowerConsumption: any;
   getTotalConsumption: any;
 }) => {
   const { litersGoal } = useContext(GoalContext);
@@ -58,8 +60,8 @@ export const Dashboard = ({
                 <SpendCard
                   icon={<WaterIcon />}
                   title="Sustainability"
-                  amount={getTotalConsumption}
-                  measurementUnit="liters"
+                  amount={getTotalPowerConsumption}
+                  measurementUnit="kWh"
                   goalAmount={120}
                   bgColor={mediumGrayColor}
                   textColor={blueColor}
