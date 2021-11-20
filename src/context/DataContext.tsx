@@ -37,7 +37,7 @@ export interface DataSet {
   houses: HouseData[];
 }
 
-const dataSet = data as DataSet;
+const dataSet = (data as unknown) as DataSet;
 
 const DataContext = createContext(dataSet);
 

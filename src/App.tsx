@@ -6,7 +6,6 @@ import { TotalUsageByDeviceChart } from "./TotalUsageByDeviceChart";
 
 function App() {
   const data = useContext(DataContext);
-  console.log("data stuff", data.houses[0].apartments);
 
   return (
     <div className="App">
