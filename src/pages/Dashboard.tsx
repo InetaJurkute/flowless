@@ -33,8 +33,7 @@ export const Dashboard = ({
       <div className="app">
         {/* До́брый ве́чер ( ͡° ͜ʖ ͡°) */}
         <Heading textAlign="left" as="h1" size="xl" marginBottom="32px">
-          Welcome, <br />
-          here's your dashboard
+          Dashboard
         </Heading>
         <div className="dashboard-wrapper">
           <div className="flex-bigger">
@@ -65,7 +64,7 @@ export const Dashboard = ({
                       fontSize={{ base: "sm", md: "md" }}
                       margin="16px 0"
                     >
-                      Set your consumption goals
+                      Set your monthly consumption goals
                     </Heading>
                   </Box>
                   <GoalSetter data={data} />

@@ -19,108 +19,83 @@ const AverageList = (props: {
 }) => {
   const diff = props.totalSpend / props.peopleCount - props.averageSpend.Total;
   const isAboveAverage = diff > 0;
+  const cardData = props.monthlySpend.map((data) => {
+    const diff =
+      data.total / props.peopleCount - props.averageSpend[data.device];
+    const isAboveAverage = diff > 0;
+    return { diff, isAboveAverage, device: data.device };
+  });
+
   return (
     <>
       <Grid
-        marginTop="64px"
+        margin="64px 0"
         gap={4}
-        templateRows="repeat(4, 1fr)"
+        templateRows="repeat(3, 1fr)"
         templateColumns="repeat(2, 1fr)"
       >
-        <GridItem colSpan={2} rowStart={1} rowEnd={2}>
+        <GridItem colStart={1} colEnd={2} rowStart={1} rowEnd={2}>
           <HorizontalCard
             customText="Current total water spend per person this month is"
             measurementUnit="liters"
             amount={isAboveAverage ? +diff.toFixed(2) : +(-diff).toFixed(2)}
             isAboveAverage={isAboveAverage}
-            title="test"
           />
         </GridItem>
 
-        <GridItem colStart={1} colEnd={2} rowStart={2} rowEnd={3}>
+        <GridItem colStart={2} colEnd={3} rowStart={1} rowEnd={2}>
           <HorizontalCard
-            customText="Current total water spend per person this month is"
+            customText="Current total water spend per person with your"
             measurementUnit="liters"
-            amount={+diff.toFixed(2)}
-            isAboveAverage={isAboveAverage}
-            title="test"
+            amount={+cardData[0].diff.toFixed(2)}
+            isAboveAverage={cardData[0].isAboveAverage}
+            title={cardData[0].device}
+            subTitle="this month is"
           />
         </GridItem>
         <GridItem colStart={2} colEnd={3} rowStart={2} rowEnd={3}>
           <HorizontalCard
-            customText="Current total water spend per person this month is"
+            customText="Current total water spend per person with your"
             measurementUnit="liters"
-            amount={+diff.toFixed(2)}
-            isAboveAverage={isAboveAverage}
-            title="test"
+            amount={+cardData[1].diff.toFixed(2)}
+            isAboveAverage={cardData[1].isAboveAverage}
+            title={cardData[1].device}
+            subTitle="this month is"
           />
         </GridItem>
 
         <GridItem colStart={1} colEnd={2} rowStart={3} rowEnd={4}>
           <HorizontalCard
-            customText="Current total water spend per person this month is"
+            customText="Current total water spend per person with your"
             measurementUnit="liters"
-            amount={+diff.toFixed(2)}
-            isAboveAverage={isAboveAverage}
-            title="test"
+            amount={+cardData[2].diff.toFixed(2)}
+            isAboveAverage={cardData[2].isAboveAverage}
+            title={cardData[2].device}
+            subTitle="this month is"
           />
         </GridItem>
         <GridItem colStart={2} colEnd={3} rowStart={3} rowEnd={4}>
           <HorizontalCard
-            customText="Current total water spend per person this month is"
+            customText="Current total water spend per person with your"
             measurementUnit="liters"
-            amount={+diff.toFixed(2)}
-            isAboveAverage={isAboveAverage}
-            title="test"
+            amount={+cardData[3].diff.toFixed(2)}
+            isAboveAverage={cardData[3].isAboveAverage}
+            title={cardData[3].device}
+            subTitle="this month is"
           />
         </GridItem>
 
-        <GridItem colStart={1} colEnd={2} rowStart={4} rowEnd={5}>
+        <GridItem colStart={1} colEnd={2} rowStart={2} rowEnd={3}>
           <HorizontalCard
-            customText="Current total water spend per person this month is"
+            customText="Current total water spend per person with your"
             measurementUnit="liters"
-            amount={+diff.toFixed(2)}
-            isAboveAverage={isAboveAverage}
-            title="test"
-          />
-        </GridItem>
-        <GridItem colStart={2} colEnd={3} rowStart={4} rowEnd={5}>
-          <HorizontalCard
-            customText="Current total water spend per person this month is"
-            measurementUnit="liters"
-            amount={+diff.toFixed(2)}
-            isAboveAverage={isAboveAverage}
-            title="test"
+            amount={+cardData[4].diff.toFixed(2)}
+            isAboveAverage={cardData[4].isAboveAverage}
+            title={cardData[4].device}
+            subTitle="this month is"
           />
         </GridItem>
       </Grid>
-
-      {diff > 0 ? (
-        <li>
-          Current total water spend per person this month is {diff.toFixed(2)}L
-          above the global average.
-        </li>
-      ) : (
-        <li>
-          Current total water spend per person this month is{" "}
-          {(diff * -1).toFixed(2)}L below the global average.
-        </li>
-      )}
-      {props.monthlySpend.map((data) => {
-        const diff =
-          data.total / props.peopleCount - props.averageSpend[data.device];
-        return diff > 0 ? (
-          <li>
-            Current total water spend per person with your {data.device} this
-            month is {diff.toFixed(2)}L above the global average.
-          </li>
-        ) : (
-          <li>
-            Current total water spend per person with your {data.device} this
-            month is {(diff * -1).toFixed(2)}L below the global average.
-          </li>
-        );
-      })}
     </>
   );
 };
