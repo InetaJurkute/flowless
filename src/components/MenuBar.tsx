@@ -16,11 +16,12 @@ import {
   HamburgerIcon,
   SettingsIcon,
 } from "@chakra-ui/icons";
-import { blueColor, mediumGrayColor } from "../theme/colors";
+import { backgroundColor, blueColor, mediumGrayColor } from "../theme/colors";
 
 import { Image } from "@chakra-ui/image";
 
 import logo from "../logo.png";
+import { getAppIcon } from "./icons/WaterIcon";
 
 export const MenuBar = () => {
   return (
@@ -34,24 +35,17 @@ export const MenuBar = () => {
       boxShadow="md"
     >
       <Flex alignItems="center" justifyContent="space-between">
-        {/* <Box
+        <Flex
+          alignItems="center"
+          justifyContent="center"
           borderRadius="50%"
           backgroundColor={blueColor}
           height="40px"
           width="40px"
           marginRight="16px"
-        /> */}
-        <Box>
-          <Image
-            padding="8px"
-            backgroundColor={blueColor}
-            borderRadius="50%"
-            boxSize="40px"
-            marginRight="16px"
-            src={logo}
-            alt="logo"
-          />
-        </Box>
+        >
+          {getAppIcon(backgroundColor)}
+        </Flex>
         <Text fontSize="lg" fontWeight="bold">
           Flowless
         </Text>
