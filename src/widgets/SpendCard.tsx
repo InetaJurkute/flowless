@@ -9,6 +9,7 @@ interface SpendCardProps {
   icon?: React.ReactNode;
   textColor?: string;
   bgColor?: string;
+  hideContent?: boolean;
   onClick?: () => any;
 }
 
@@ -20,6 +21,7 @@ export const SpendCard = ({
   icon,
   textColor,
   bgColor,
+  hideContent,
   onClick,
 }: SpendCardProps) => {
   return (
@@ -42,12 +44,12 @@ export const SpendCard = ({
           {title}
         </Heading>
       </Box>
-      <Box>
+      <Box hidden={hideContent}>
         <Text fontSize={{ base: "xl", md: "4xl" }} fontWeight="regular">
           {amount} {measurementUnit}
         </Text>
       </Box>
-      <Box marginTop="32px">
+      <Box marginTop="32px" hidden={hideContent}>
         {goalAmount ? (
           <>
             <Text fontSize="sm" fontWeight="regular" display="inline">

@@ -136,6 +136,10 @@ export const GoalSetter = ({ data }: { data: DataSet }) => {
                   value={GoalType.Money.toString()}
                   label={GoalType.Money.toString()}
                 />
+                <option
+                  value={GoalType.Power.toString()}
+                  label={GoalType.Power.toString()}
+                />
               </Select>
 
               <Field
@@ -154,7 +158,7 @@ export const GoalSetter = ({ data }: { data: DataSet }) => {
 
             {newGoalSet && values.monthlyGoalType === GoalType.Liters && (
               <div>
-                You will spend ~{moneyGoal} EU on water if you stick to your
+                You will spend ~{moneyGoal} EUR on water if you stick to your
                 goal!
               </div>
             )}
