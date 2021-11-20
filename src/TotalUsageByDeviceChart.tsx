@@ -1,46 +1,23 @@
 import { ResponsiveRadar } from "@nivo/radar";
-import { useMemo } from "react";
-import { sumBy } from "lodash";
 import {
-  currentMonth,
-  DataSet,
   Appliance,
-  Measurement,
 } from "./context/DataContext";
 
 interface TotalUsageByDeviceChartProps {
-  data: DataSet;
+  data: {
+    device: Appliance;
+    total: number;
+  }[];
 }
 
 export const TotalUsageByDeviceChart = ({
   data,
 }: TotalUsageByDeviceChartProps) => {
-  const getTotalUsageByDeiceData = useMemo(() => {
-    //USE THE FIRST ONE
-    const myApartmentData = data.houses[0].apartments[0];
-
-    const summedData = Object.values(Appliance).map((device) => {
-      const myMeasurements = myApartmentData[device].measurements.filter(
-        (m) => m.TimeStamp >= currentMonth.toString()
-      );
-      return {
-        device,
-        total: sumBy(myMeasurements, (x) =>
-          parseFloat((x as Measurement).Consumption)
-        ),
-      };
-    });
-
-    return summedData;
-  }, [data.houses]);
-
-  const radarChartData = getTotalUsageByDeiceData;
-
   return (
     <div className="responsive-chart-wrapper">
       <h3>Total Consumption For Current Month</h3>
       <ResponsiveRadar
-        data={radarChartData}
+        data={data}
         keys={["total"]}
         indexBy="device"
         valueFormat=">-.2f"
