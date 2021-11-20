@@ -1,3 +1,4 @@
+import { Heading } from "@chakra-ui/layout";
 import { ResponsiveBar } from "@nivo/bar";
 import { sumBy } from "lodash";
 import { useMemo } from "react";
@@ -61,7 +62,9 @@ export const UsagePerDayChart = ({ data }: { data: DataSet }) => {
 
   return (
     <div className="responsive-chart-wrapper">
-      <h3>Consumption Per Day By Device This Month(L)</h3>
+      <Heading as="h5" size="sm">
+        Consumption Per Day By Device This Month
+      </Heading>
       <ResponsiveBar
         data={chartData}
         keys={Object.values(Appliance)}

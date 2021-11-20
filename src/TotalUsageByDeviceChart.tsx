@@ -1,3 +1,4 @@
+import { Heading } from "@chakra-ui/layout";
 import { ResponsiveRadar } from "@nivo/radar";
 import { flowless } from "./charts/theme";
 import { Appliance } from "./context/DataContext";
@@ -14,7 +15,10 @@ export const TotalUsageByDeviceChart = ({
 }: TotalUsageByDeviceChartProps) => {
   return (
     <div className="responsive-chart-wrapper">
-      <h3>Total Consumption For Current Month</h3>
+      <Heading as="h5" size="sm">
+        Total Consumption For Current Month
+      </Heading>
+
       <ResponsiveRadar
         data={data}
         keys={["total"]}
@@ -31,27 +35,6 @@ export const TotalUsageByDeviceChart = ({
         motionConfig="wobbly"
         enableDotLabel={true}
         theme={flowless}
-        legends={[
-          {
-            anchor: "bottom",
-            direction: "column",
-            translateX: -50,
-            translateY: -120,
-            itemWidth: 80,
-            itemHeight: 20,
-            itemTextColor: "#999",
-            symbolSize: 12,
-            symbolShape: "circle",
-            effects: [
-              {
-                on: "hover",
-                style: {
-                  itemTextColor: "#000",
-                },
-              },
-            ],
-          },
-        ]}
       />
     </div>
   );
