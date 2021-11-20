@@ -35,20 +35,11 @@ function App() {
   }, [data]);
 
   const applianceAverages = {
-    [labelMap.get(Appliance.Dishwasher)!]: getAverage(
-      monthData,
-      Appliance.Dishwasher
-    ),
-    [labelMap.get(Appliance.Faucet)!]: getAverage(monthData, Appliance.Faucet),
-    [labelMap.get(Appliance.KitchenFaucet)!]: getAverage(
-      monthData,
-      Appliance.KitchenFaucet
-    ),
-    [labelMap.get(Appliance.Shower)!]: getAverage(monthData, Appliance.Shower),
-    [labelMap.get(Appliance.WashingMachine)!]: getAverage(
-      monthData,
-      Appliance.WashingMachine
-    ),
+    [Appliance.Dishwasher]: getAverage(monthData, Appliance.Dishwasher),
+    [Appliance.Faucet]: getAverage(monthData, Appliance.Faucet),
+    [Appliance.KitchenFaucet]: getAverage(monthData, Appliance.KitchenFaucet),
+    [Appliance.Shower]: getAverage(monthData, Appliance.Shower),
+    [Appliance.WashingMachine]: getAverage(monthData, Appliance.WashingMachine),
   };
   const monthlyAverages = {
     ...applianceAverages,
@@ -65,7 +56,7 @@ function App() {
         (m) => m.TimeStamp >= currentMonth.toString()
       );
       return {
-        device: labelMap.get(device)!,
+        device,
         total: sumBy(myMeasurements, (x) =>
           parseFloat((x as Measurement).Consumption)
         ),
