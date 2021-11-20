@@ -72,18 +72,6 @@ export const Dashboard = ({
               <GridItem colStart={1} colEnd={2} rowStart={4} rowEnd={6}>
                 <SpendCard
                   icon={<WaterIcon />}
-                  title="Spend"
-                  amount={22}
-                  measurementUnit="EUR"
-                  goalAmount={Number(moneyGoal)}
-                  bgColor={mediumGrayColor}
-                  textColor={blueColor}
-                  onClick={() => navigate("/flowless/spend")}
-                />
-              </GridItem>
-              <GridItem colStart={2} colEnd={3} rowStart={3} rowEnd={5}>
-                <SpendCard
-                  icon={<WaterIcon />}
                   title="Challenges"
                   amount={getTotalConsumption}
                   measurementUnit="liters"
@@ -92,6 +80,18 @@ export const Dashboard = ({
                   textColor={blueColor}
                   hideContent={true}
                   onClick={() => navigate("/flowless/challenges")}
+                />
+              </GridItem>
+              <GridItem colStart={2} colEnd={3} rowStart={3} rowEnd={5}>
+                <SpendCard
+                  icon={<WaterIcon />}
+                  title="Spend"
+                  amount={22}
+                  measurementUnit="EUR"
+                  goalAmount={Number(moneyGoal)}
+                  bgColor={mediumGrayColor}
+                  textColor={blueColor}
+                  onClick={() => navigate("/flowless/spend")}
                 />
               </GridItem>
               <GridItem colStart={2} colEnd={3} rowStart={5} rowEnd={6}>
