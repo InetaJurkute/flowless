@@ -28,7 +28,7 @@ return (<div>
         Log Out
       </MenuItem>
     </MenuList>
-    <Button bg="red">
+    <Button bg="red" width="40px">
         <BellIcon/>
     </Button>
     FlOwless
