@@ -31,15 +31,15 @@ export const ChallengesPage = () => {
   const yourChallenges: challengeList = {
     "id-1": {
       id: "id-1",
-      title: "Plan Money",
-      desc: "The future can be even brighter but a goal without a plan is just a wish",
+      title: "Every Drop Counts",
+      desc: "Make every single drop count! Use 100 ml less water today in order to successfully pass this challenge.",
       progress: "Not started",
       nonStarted: true,
     },
     "id-2": {
       id: "id-2",
-      title: "Save Money",
-      desc: "You deserve good things. With a whooping 10-15% interest rate per annum, grow your savings on your own terms with our completely automated process",
+      title: "Winter Is Coming",
+      desc: "The colder the shower, the less energy is wasted. Use 0.1 kWh less today in order to successfully pass this challenge.",
       progress: "complete",
       nonStarted: false,
     },
@@ -48,15 +48,15 @@ export const ChallengesPage = () => {
   const dailyChallenges: challengeList = {
     "id-3": {
       id: "id-3",
-      title: "Plan Money",
-      desc: "The future can be even brighter but a goal without a plan is just a wish",
+      title: "Every Drop Counts",
+      desc: "Make every single drop count! Use 100 ml less water today in order to successfully pass this challenge.",
       progress: "1 out of 10",
       nonStarted: true,
     },
     "id-4": {
       id: "id-4",
-      title: "Save Money",
-      desc: "You deserve good things. With a whooping 10-15% interest rate per annum, grow your savings on your own terms with our completely automated process",
+      title: "Winter Is Coming",
+      desc: "The colder the shower, the less energy is wasted. Use 0.1 kWh less today in order to successfully pass this challenge.",
       progress: "1 out of 10",
       nonStarted: false,
     },
@@ -65,8 +65,8 @@ export const ChallengesPage = () => {
   const monthlyChallenges: challengeList = {
     "id-6": {
       id: "id-6",
-      title: "Plan Money",
-      desc: "The future can be even brighter but a goal without a plan is just a wish",
+      title: "Every Tub Counts",
+      desc: "You should try fast showers instead of long baths! Use 200 litres less this month in order to pass this challenge.",
       progress: "1 out of 10",
       nonStarted: false,
     },
