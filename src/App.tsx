@@ -1,9 +1,12 @@
 import React from "react";
+import data from "./db.json";
 
 import logo from "./logo.svg";
 import "./App.css";
 
 function App() {
+  console.log("data stuff", (data as any).houses.length);
+
   return (
     <div className="App">
       <header className="App-header">
