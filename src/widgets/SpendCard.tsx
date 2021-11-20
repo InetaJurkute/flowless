@@ -33,12 +33,12 @@ export const SpendCard = ({
     >
       <Box>
         {icon && icon}
-        <Heading as="h2" size="md" margin="16px 0">
+        <Heading as="h2" fontSize={{ base: "sm", md: "md" }} margin="16px 0">
           {title}
         </Heading>
       </Box>
       <Box>
-        <Text fontSize="4xl" fontWeight="regular">
+        <Text fontSize={{ base: "xl", md: "4xl" }} fontWeight="regular">
           {amount} {measurementUnit}
         </Text>
       </Box>
