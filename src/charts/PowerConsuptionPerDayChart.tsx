@@ -2,7 +2,7 @@ import { Heading } from "@chakra-ui/layout";
 import { ResponsiveBar } from "@nivo/bar";
 import { sumBy } from "lodash";
 import { useMemo } from "react";
-import { Link } from "react-router-dom";
+import { BackLink } from "../components/BackLink";
 import { MenuBar } from "../components/MenuBar";
 import {
   currentDate,
@@ -104,7 +104,8 @@ export const PowerConsumptionPerDayChart = ({ data }: { data: DataSet }) => {
               },
             ]}
           />
-          <Link to="/flowless">Back</Link>
+
+          <BackLink />
         </div>
       </div>
     </>
