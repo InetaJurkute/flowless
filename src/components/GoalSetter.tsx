@@ -7,7 +7,7 @@ import {
 } from "../context/DataContext";
 import { Form, Formik, Field, ErrorMessage } from "formik";
 import { sumBy } from "lodash";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import GoalContext from "../context/GoalContext";
 
 export enum GoalType {

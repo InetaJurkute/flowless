@@ -17,8 +17,8 @@ const barColors = {
   [`${Appliance.WashingMachine}Color`]: "hsl(345, 70%, 50%)",
 };
 
-export const UsagePerDayChart = ({ data }: { data: DataSet }) => {
-  const getUsagePerDayData = useMemo(() => {
+export const PowerConsumptionPerDayChart = ({ data }: { data: DataSet }) => {
+  const getPowerConsumptionPerDayData = useMemo(() => {
     const chartData = [];
     for (let i = 1; i <= currentDate.day; i++) {
       const dayData = filterData(
@@ -30,24 +30,24 @@ export const UsagePerDayChart = ({ data }: { data: DataSet }) => {
         day: i,
         [Appliance.Dishwasher]: sumBy(
           dayData.houses[0].apartments[0][Appliance.Dishwasher].measurements,
-          (x) => parseFloat((x as Measurement).Consumption)
+          (x) => parseFloat((x as Measurement).Power_Consumption)
         ),
         [Appliance.Faucet]: sumBy(
           dayData.houses[0].apartments[0][Appliance.Faucet].measurements,
-          (x) => parseFloat((x as Measurement).Consumption)
+          (x) => parseFloat((x as Measurement).Power_Consumption)
         ),
         [Appliance.KitchenFaucet]: sumBy(
           dayData.houses[0].apartments[0][Appliance.KitchenFaucet].measurements,
-          (x) => parseFloat((x as Measurement).Consumption)
+          (x) => parseFloat((x as Measurement).Power_Consumption)
         ),
         [Appliance.Shower]: sumBy(
           dayData.houses[0].apartments[0][Appliance.Shower].measurements,
-          (x) => parseFloat((x as Measurement).Consumption)
+          (x) => parseFloat((x as Measurement).Power_Consumption)
         ),
         [Appliance.WashingMachine]: sumBy(
           dayData.houses[0].apartments[0][Appliance.WashingMachine]
             .measurements,
-          (x) => parseFloat((x as Measurement).Consumption)
+          (x) => parseFloat((x as Measurement).Power_Consumption)
         ),
         ...barColors,
       });
@@ -56,11 +56,11 @@ export const UsagePerDayChart = ({ data }: { data: DataSet }) => {
     return chartData;
   }, [data]);
 
-  const chartData = getUsagePerDayData;
+  const chartData = getPowerConsumptionPerDayData;
 
   return (
     <div className="responsive-chart-wrapper">
-      <h3>Consumption Per Day By Device This Month(L)</h3>
+      <h3>Power Consumption Per Day By Device This Month(kwH)</h3>
       <ResponsiveBar
         data={chartData}
         keys={Object.values(Appliance)}
