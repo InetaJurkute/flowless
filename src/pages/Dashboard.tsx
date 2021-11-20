@@ -58,7 +58,6 @@ export const Dashboard = ({
                   bg={mediumGrayColor}
                   color={blueColor}
                   padding="16px"
-                  _hover={{ bg: "gray.300" }}
                 >
                   <Box>
                     <Heading
