@@ -15,6 +15,13 @@ interface MonthlyGoal {
 export const GoalSetter = ({ data }: { data: DataSet }) => {
   const handleSubmit = (values: MonthlyGoal, {}) => {
     console.log("calculate matching goal", values);
+    if (values.monthlyGoalType === "Liters") {
+      localStorage.setItem("Liters", values.monthlyGoalAmount);
+    } else {
+      //do magic
+      const litersFromMoney = Math.random();
+      localStorage.setItem("Liters", litersFromMoney.toString());
+    }
 
     //calculate related liters/money
     //save to local state
