@@ -18,6 +18,10 @@ import { MenuBar } from "./components/MenuBar";
 import { ChallengesPage } from "./pages/ChallengesPage";
 import GoalContext from "./context/GoalContext";
 import { PowerConsumptionPerDayChart } from "./charts/PowerConsuptionPerDayChart";
+import { GithubContributionsChart } from "./charts/GithubContributionsChart";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Dashboard } from "./pages/Dashboard";
+import { ConsumptionPage } from "./pages/ConsumptionPage";
 
 enum MenuCategory {
   Consumption = "Consumption",
@@ -84,93 +88,37 @@ function App() {
       value={{ litersGoal, setLitersGoal, moneyGoal, setMoneyGoal }}
     >
       <ChakraProvider>
-        <div className="App">
-        <MenuBar/>
-        
-          {/* <MenuCategoryStrip
-            categories={Object.values(MenuCategory)}
-            activeCategory={activeCategory}
-            setActiveCategory={setActiveCategory}
-          /> */}
-          <GoalSetter data={data} />
-          <Heading textAlign="left" as="h1" size="xl" marginBottom="32px">
-            Welcome, <br />
-            here's your dashboard
-          </Heading>
-          <div className="dashboard-wrapper">
-            <div className="flex-bigger">
-              <TotalUsageByDeviceChart data={getTotalUsageByDeiceData} />
-            </div>
-            <div className="flex-small">
-              <Grid
-                gap={4}
-                templateRows="repeat(5, 1fr)"
-                templateColumns="repeat(2, 1fr)"
-              >
-                <GridItem colStart={1} colEnd={2} rowStart={1} rowEnd={4}>
-                  <SpendCard
-                    icon={<WaterIcon />}
-                    title="Water Consumption"
-                    amount={getTotalConsumption}
-                    measurementUnit="liters"
-                    goalAmount={Number(litersGoal)}
-                    bgColor={mediumGrayColor}
-                    textColor={blueColor}
-                  />
-                </GridItem>
-                <GridItem colStart={2} colEnd={3} rowStart={1} rowEnd={3}>
-                  <SpendCard
-                    icon={<WaterIcon />}
-                    title="Water Consumption"
-                    amount={getTotalConsumption}
-                    measurementUnit="liters"
-                    goalAmount={120}
-                    bgColor={mediumGrayColor}
-                    textColor={blueColor}
-                  />
-                </GridItem>
-                <GridItem colStart={1} colEnd={2} rowStart={4} rowEnd={6}>
-                  <SpendCard
-                    icon={<WaterIcon />}
-                    title="Water Consumption"
-                    amount={getTotalConsumption}
-                    measurementUnit="liters"
-                    goalAmount={120}
-                    bgColor={mediumGrayColor}
-                    textColor={blueColor}
-                  />
-                </GridItem>
-                <GridItem colStart={2} colEnd={3} rowStart={3} rowEnd={6}>
-                  <SpendCard
-                    icon={<WaterIcon />}
-                    title="Water Consumption"
-                    amount={getTotalConsumption}
-                    measurementUnit="liters"
-                    goalAmount={120}
-                    bgColor={mediumGrayColor}
-                    textColor={blueColor}
-                  />
-                </GridItem>
-              </Grid>
-            </div>
-          </div>
-
-          {activeCategory === MenuCategory.Consumption && (
-            <>
-              <UsagePerDayChart data={monthData} />
-              <AverageList
-                monthlySpend={getTotalUsageByDeiceData}
-                averageSpend={monthlyAverages}
-                totalSpend={getTotalConsumption}
-                peopleCount={parseFloat(data.houses[0].apartments[0].people)}
-              />
-            </>
-          )}
-          {activeCategory === MenuCategory.Sustainability && (
-            <PowerConsumptionPerDayChart data={monthData} />
-          )}
-          {activeCategory === MenuCategory.Challenges && <ChallengesPage />}
-        </div>
+        <BrowserRouter>
+          <Routes>
+            <Route
+              path="flowless"
+              element={
+                <Dashboard
+                  data={data}
+                  getTotalConsumption={getTotalConsumption}
+                  getTotalUsageByDeiceData={getTotalUsageByDeiceData}
+                />
+              }
+            />
+            <Route
+              path="flowless/consumption"
+              element={
+                <ConsumptionPage
+                  data={data}
+                  getTotalConsumption={getTotalConsumption}
+                  getTotalUsageByDeiceData={getTotalUsageByDeiceData}
+                  monthData={monthData}
+                  monthlyAverages={monthlyAverages}
+                />
+              }
+            />
+            <Route
+              path="flowless/power"
+              element={<PowerConsumptionPerDayChart data={monthData} />}
+            />
+            <Route path="flowless/challenges" element={<ChallengesPage />} />
+          </Routes>
+        </BrowserRouter>
       </ChakraProvider>
     </GoalContext.Provider>
   );
