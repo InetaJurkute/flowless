@@ -23,6 +23,9 @@ function App() {
   const [moneyGoal, setMoneyGoal] = useState(
     localStorage.getItem(GoalType.Money)
   );
+  const [powerGoal, setPowerGoal] = useState(
+    localStorage.getItem(GoalType.Power)
+  );
   const data = useContext(DataContext);
 
   const monthData = useMemo(() => {
@@ -93,7 +96,14 @@ function App() {
 
   return (
     <GoalContext.Provider
-      value={{ litersGoal, setLitersGoal, moneyGoal, setMoneyGoal }}
+      value={{
+        litersGoal,
+        setLitersGoal,
+        moneyGoal,
+        setMoneyGoal,
+        powerGoal,
+        setPowerGoal,
+      }}
     >
       <ChakraProvider>
         <BrowserRouter>

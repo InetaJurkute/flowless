@@ -22,7 +22,7 @@ export const Dashboard = ({
   getTotalPowerConsumption: any;
   getTotalConsumption: any;
 }) => {
-  const { litersGoal } = useContext(GoalContext);
+  const { litersGoal, powerGoal } = useContext(GoalContext);
   const navigate = useNavigate();
   return (
     <>
@@ -63,7 +63,7 @@ export const Dashboard = ({
                   title="Power and Sustainability"
                   amount={getTotalPowerConsumption}
                   measurementUnit="kWh"
-                  goalAmount={120}
+                  goalAmount={Number(powerGoal)}
                   bgColor={mediumGrayColor}
                   textColor={blueColor}
                   onClick={() => navigate("/flowless/power")}

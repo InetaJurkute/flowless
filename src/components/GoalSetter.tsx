@@ -82,14 +82,17 @@ const getForecastedLiters = (values: MonthlyGoal, data: DataSet) => {
 };
 
 export const GoalSetter = ({ data }: { data: DataSet }) => {
-  const { litersGoal, setLitersGoal, moneyGoal, setMoneyGoal } =
+  const { litersGoal, setLitersGoal, moneyGoal, setMoneyGoal, setPowerGoal } =
     useContext(GoalContext);
 
   const [newGoalSet, setNewGoalSet] = useState(false);
 
   const handleSubmit = (values: MonthlyGoal, {}) => {
     setNewGoalSet(true);
-    if (values.monthlyGoalType === GoalType.Liters) {
+    if (values.monthlyGoalType === GoalType.Power) {
+      localStorage.setItem(GoalType.Power, values.monthlyGoalAmount);
+      setPowerGoal(values.monthlyGoalAmount);
+    } else if (values.monthlyGoalType === GoalType.Liters) {
       localStorage.setItem(GoalType.Liters, values.monthlyGoalAmount);
       setLitersGoal(values.monthlyGoalAmount);
 
