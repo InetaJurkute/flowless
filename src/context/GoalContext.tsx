@@ -5,8 +5,12 @@ const GoalContext = createContext({
   setLitersGoal: (goal: string) => {
     console.log(goal);
   },
-  moneyGoal: localStorage.getItem("Liters"),
+  moneyGoal: localStorage.getItem("Money"),
   setMoneyGoal: (goal: string) => {
+    console.log(goal);
+  },
+  powerGoal: localStorage.getItem("Power"),
+  setPowerGoal: (goal: string) => {
     console.log(goal);
   },
 });

@@ -9,10 +9,13 @@ import { Form, Formik, Field, ErrorMessage } from "formik";
 import { sumBy } from "lodash";
 import { useContext, useState } from "react";
 import GoalContext from "../context/GoalContext";
+import { Select } from "@chakra-ui/select";
+import { Stack } from "@chakra-ui/layout";
 
 export enum GoalType {
   Liters = "Liters",
   Money = "Budget",
+  Power = "Power",
 }
 
 interface MonthlyGoal {
@@ -79,14 +82,17 @@ const getForecastedLiters = (values: MonthlyGoal, data: DataSet) => {
 };
 
 export const GoalSetter = ({ data }: { data: DataSet }) => {
-  const { litersGoal, setLitersGoal, moneyGoal, setMoneyGoal } =
+  const { litersGoal, setLitersGoal, moneyGoal, setMoneyGoal, setPowerGoal } =
     useContext(GoalContext);
 
   const [newGoalSet, setNewGoalSet] = useState(false);
 
   const handleSubmit = (values: MonthlyGoal, {}) => {
     setNewGoalSet(true);
-    if (values.monthlyGoalType === GoalType.Liters) {
+    if (values.monthlyGoalType === GoalType.Power) {
+      localStorage.setItem(GoalType.Power, values.monthlyGoalAmount);
+      setPowerGoal(values.monthlyGoalAmount);
+    } else if (values.monthlyGoalType === GoalType.Liters) {
       localStorage.setItem(GoalType.Liters, values.monthlyGoalAmount);
       setLitersGoal(values.monthlyGoalAmount);
 
@@ -115,35 +121,36 @@ export const GoalSetter = ({ data }: { data: DataSet }) => {
       >
         {({ values, handleChange, handleBlur }) => (
           <Form>
-            <select
-              name="monthlyGoalType"
-              value={values.monthlyGoalType}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            >
-              <option value="" label="Select a type" />
-              <option
-                value={GoalType.Liters.toString()}
-                label={GoalType.Liters.toString()}
-              />
-              <option
-                value={GoalType.Money.toString()}
-                label={GoalType.Money.toString()}
-              />
-            </select>
+            <Stack spacing={3}>
+              <Select
+                name="monthlyGoalType"
+                value={values.monthlyGoalType}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              >
+                <option
+                  value={GoalType.Liters.toString()}
+                  label={GoalType.Liters.toString()}
+                />
+                <option
+                  value={GoalType.Money.toString()}
+                  label={GoalType.Money.toString()}
+                />
+              </Select>
 
-            <Field
-              type="text"
-              name="monthlyGoalAmount"
-              style={{ backgroundColor: "yellow" }}
-              onChange={(values: any) => {
-                setNewGoalSet(false);
-                handleChange(values);
-              }}
-            />
-            <ErrorMessage name="monthlyGoalAmount" component="div" />
+              <Field
+                type="text"
+                name="monthlyGoalAmount"
+                style={{ backgroundColor: "yellow" }}
+                onChange={(values: any) => {
+                  setNewGoalSet(false);
+                  handleChange(values);
+                }}
+              />
+              <ErrorMessage name="monthlyGoalAmount" component="div" />
 
-            <Button type="submit">Set Goal</Button>
+              <Button type="submit">Set Goal</Button>
+            </Stack>
 
             {newGoalSet && values.monthlyGoalType === GoalType.Liters && (
               <div>

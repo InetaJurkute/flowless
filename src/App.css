@@ -1,15 +1,15 @@
-.App {
+.app {
     margin: 44px 128px;
 }
 
 @media (max-width: 1024px) {
-  .App {
+  .app {
     margin: 44px 64px;
   }
 }
 
 @media (max-width: 480px) {
-  .App {
+  .app {
     margin: 32px 24px;
   }
 }
@@ -18,21 +18,22 @@
   display: flex;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 1024px) {
   .dashboard-wrapper {
     flex-direction: column;
   }
 }
 
 .flex-small {
-  flex: 1 1 45%;
+  flex: 0 0 40%;
 }
 
 .flex-bigger {
-  flex: 1 1 65%;
+  flex: 0 0 60%;
+  margin: 0 auto;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 1024px) {
   .flex-small,
   .flex-bigger {
     flex: 1 1 100%;
@@ -66,12 +67,25 @@
 }
 
 .responsive-chart-wrapper {
-  height: 500px;
+  height: 400px;
+  max-width: 50vw;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 1280px) {
   .responsive-chart-wrapper {
-    height: 300px;
+    height: 350px;
+  }
+}
+
+@media (max-width: 500px) {
+  .responsive-chart-wrapper {
+    max-width: unset;
+  }
+}
+
+@media (max-width: 768px) {
+  .responsive-chart-wrapper {
+    height: 290px;
   }
 }
 

@@ -22,75 +22,79 @@ export const Dashboard = ({
   getTotalPowerConsumption: any;
   getTotalConsumption: any;
 }) => {
-  const { litersGoal } = useContext(GoalContext);
+  const { litersGoal, powerGoal } = useContext(GoalContext);
   const navigate = useNavigate();
   return (
     <>
       <MenuBar />
-      <GoalSetter data={data} />
-      <Heading textAlign="left" as="h1" size="xl" marginBottom="32px">
-      До́брый ве́чер ( ͡° ͜ʖ ͡°)
-      </Heading>
-      <div className="dashboard-wrapper">
-        <div className="flex-bigger">
-          <TotalUsageByDeviceChart data={getTotalUsageByDeiceData} />
-          <GithubContributionsChart data={data} />
-        </div>
-        <div className="flex-small">
-          <Grid
-            gap={4}
-            templateRows="repeat(5, 1fr)"
-            templateColumns="repeat(2, 1fr)"
-          >
-            <GridItem colStart={1} colEnd={2} rowStart={1} rowEnd={4}>
-              <SpendCard
-                icon={<WaterIcon />}
-                title="Water Consumption"
-                amount={getTotalConsumption}
-                measurementUnit="liters"
-                goalAmount={Number(litersGoal)}
-                bgColor={mediumGrayColor}
-                textColor={blueColor}
-                onClick={() => navigate("/flowless/consumption")}
-              />
-            </GridItem>
-            <GridItem colStart={2} colEnd={3} rowStart={1} rowEnd={3}>
-              <SpendCard
-                icon={<WaterIcon />}
-                title="Sustainability"
-                amount={getTotalPowerConsumption}
-                measurementUnit="kWh"
-                goalAmount={120}
-                bgColor={mediumGrayColor}
-                textColor={blueColor}
-                onClick={() => navigate("/flowless/power")}
-              />
-            </GridItem>
-            <GridItem colStart={1} colEnd={2} rowStart={4} rowEnd={6}>
-              <SpendCard
-                icon={<WaterIcon />}
-                title="Spend"
-                amount={getTotalConsumption}
-                measurementUnit="liters"
-                goalAmount={120}
-                bgColor={mediumGrayColor}
-                textColor={blueColor}
-                onClick={() => navigate("/flowless/spend")}
-              />
-            </GridItem>
-            <GridItem colStart={2} colEnd={3} rowStart={3} rowEnd={6}>
-              <SpendCard
-                icon={<WaterIcon />}
-                title="Challenges"
-                amount={getTotalConsumption}
-                measurementUnit="liters"
-                goalAmount={120}
-                bgColor={mediumGrayColor}
-                textColor={blueColor}
-                onClick={() => navigate("/flowless/challenges")}
-              />
-            </GridItem>
-          </Grid>
+      <div className="app">
+        <GoalSetter data={data} />
+        {/* До́брый ве́чер ( ͡° ͜ʖ ͡°) */}
+        <Heading textAlign="left" as="h1" size="xl" marginBottom="32px">
+          Welcome, <br />
+          here's your dashboard
+        </Heading>
+        <div className="dashboard-wrapper">
+          <div className="flex-bigger">
+            <TotalUsageByDeviceChart data={getTotalUsageByDeiceData} />
+            <GithubContributionsChart data={data} />
+          </div>
+          <div className="flex-small">
+            <Grid
+              gap={4}
+              templateRows="repeat(5, 1fr)"
+              templateColumns="repeat(2, 1fr)"
+            >
+              <GridItem colStart={1} colEnd={2} rowStart={1} rowEnd={4}>
+                <SpendCard
+                  icon={<WaterIcon />}
+                  title="Water Consumption"
+                  amount={getTotalConsumption}
+                  measurementUnit="liters"
+                  goalAmount={Number(litersGoal)}
+                  bgColor={mediumGrayColor}
+                  textColor={blueColor}
+                  onClick={() => navigate("/flowless/consumption")}
+                />
+              </GridItem>
+              <GridItem colStart={2} colEnd={3} rowStart={1} rowEnd={3}>
+                <SpendCard
+                  icon={<WaterIcon />}
+                  title="Power and Sustainability"
+                  amount={getTotalPowerConsumption}
+                  measurementUnit="kWh"
+                  goalAmount={Number(powerGoal)}
+                  bgColor={mediumGrayColor}
+                  textColor={blueColor}
+                  onClick={() => navigate("/flowless/power")}
+                />
+              </GridItem>
+              <GridItem colStart={1} colEnd={2} rowStart={4} rowEnd={6}>
+                <SpendCard
+                  icon={<WaterIcon />}
+                  title="Spend"
+                  amount={getTotalConsumption}
+                  measurementUnit="liters"
+                  goalAmount={120}
+                  bgColor={mediumGrayColor}
+                  textColor={blueColor}
+                  onClick={() => navigate("/flowless/spend")}
+                />
+              </GridItem>
+              <GridItem colStart={2} colEnd={3} rowStart={3} rowEnd={6}>
+                <SpendCard
+                  icon={<WaterIcon />}
+                  title="Challenges"
+                  amount={getTotalConsumption}
+                  measurementUnit="liters"
+                  goalAmount={120}
+                  bgColor={mediumGrayColor}
+                  textColor={blueColor}
+                  onClick={() => navigate("/flowless/challenges")}
+                />
+              </GridItem>
+            </Grid>
+          </div>
         </div>
       </div>
     </>

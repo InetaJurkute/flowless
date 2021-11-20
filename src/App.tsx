@@ -1,35 +1,20 @@
-import { Box, ChakraProvider, Grid, GridItem, Heading } from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
 import React, { useContext, useMemo, useState } from "react";
 import sumBy from "lodash/sumBy";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import "./App.css";
 import DataContext, { currentDate, filterData } from "./context/DataContext";
-import { UsagePerDayChart } from "./charts/UsagePerDayChart";
-import { SpendCard } from "./widgets/SpendCard";
 import { currentMonth, Appliance, Measurement } from "./context/DataContext";
-import { WaterIcon } from "./components/icons/WaterIcon";
-import { blueColor, mediumGrayColor } from "./theme/colors";
-import { TotalUsageByDeviceChart } from "./TotalUsageByDeviceChart";
 import { getAverage } from "./utils";
 import { sum } from "lodash";
-import AverageList, { AverageSpend } from "./widgets/AverageList";
-import { GoalSetter, GoalType } from "./components/GoalSetter";
-import { MenuBar } from "./components/MenuBar";
+import { GoalType } from "./components/GoalSetter";
 import { ChallengesPage } from "./pages/ChallengesPage";
 import GoalContext from "./context/GoalContext";
 import { PowerConsumptionPerDayChart } from "./charts/PowerConsuptionPerDayChart";
-import { GithubContributionsChart } from "./charts/GithubContributionsChart";
 import { Dashboard } from "./pages/Dashboard";
 import { ConsumptionPage } from "./pages/ConsumptionPage";
-import { labelMap } from "./applianceLabel";
-
-enum MenuCategory {
-  Consumption = "Consumption",
-  Spend = "Spend",
-  Sustainability = "Sustainability",
-  Challenges = "Challenges",
-}
+import { AverageSpend } from "./widgets/AverageList";
 
 function App() {
   const [litersGoal, setLitersGoal] = useState(
@@ -37,6 +22,9 @@ function App() {
   );
   const [moneyGoal, setMoneyGoal] = useState(
     localStorage.getItem(GoalType.Money)
+  );
+  const [powerGoal, setPowerGoal] = useState(
+    localStorage.getItem(GoalType.Power)
   );
   const data = useContext(DataContext);
 
@@ -49,26 +37,16 @@ function App() {
   }, [data]);
 
   const applianceAverages = {
-    [labelMap.get(Appliance.Dishwasher)!]: getAverage(
-      monthData,
-      Appliance.Dishwasher
-    ),
-    [labelMap.get(Appliance.Faucet)!]: getAverage(monthData, Appliance.Faucet),
-    [labelMap.get(Appliance.KitchenFaucet)!]: getAverage(
-      monthData,
-      Appliance.KitchenFaucet
-    ),
-    [labelMap.get(Appliance.Shower)!]: getAverage(monthData, Appliance.Shower),
-    [labelMap.get(Appliance.WashingMachine)!]: getAverage(
-      monthData,
-      Appliance.WashingMachine
-    ),
+    [Appliance.Dishwasher]: getAverage(monthData, Appliance.Dishwasher),
+    [Appliance.Faucet]: getAverage(monthData, Appliance.Faucet),
+    [Appliance.KitchenFaucet]: getAverage(monthData, Appliance.KitchenFaucet),
+    [Appliance.Shower]: getAverage(monthData, Appliance.Shower),
+    [Appliance.WashingMachine]: getAverage(monthData, Appliance.WashingMachine),
   };
   const monthlyAverages = {
     ...applianceAverages,
     Total: sum(Object.values(applianceAverages)),
   } as AverageSpend;
-  const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
   const getTotalUsageByDeiceData = useMemo(() => {
     //USE THE FIRST ONE
@@ -79,7 +57,7 @@ function App() {
         (m) => m.TimeStamp >= currentMonth.toString()
       );
       return {
-        device: labelMap.get(device)!,
+        device,
         total: sumBy(myMeasurements, (x) =>
           parseFloat((x as Measurement).Consumption)
         ),
@@ -98,7 +76,7 @@ function App() {
         (m) => m.TimeStamp >= currentMonth.toString()
       );
       return {
-        device: labelMap.get(device)!,
+        device,
         total: sumBy(myMeasurements, (x) =>
           parseFloat((x as Measurement).Power_Consumption)
         ),
@@ -118,7 +96,14 @@ function App() {
 
   return (
     <GoalContext.Provider
-      value={{ litersGoal, setLitersGoal, moneyGoal, setMoneyGoal }}
+      value={{
+        litersGoal,
+        setLitersGoal,
+        moneyGoal,
+        setMoneyGoal,
+        powerGoal,
+        setPowerGoal,
+      }}
     >
       <ChakraProvider>
         <BrowserRouter>

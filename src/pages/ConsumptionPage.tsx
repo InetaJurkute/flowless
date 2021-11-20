@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { UsagePerDayChart } from "../charts/UsagePerDayChart";
+import { MenuBar } from "../components/MenuBar";
 import { DataSet } from "../context/DataContext";
 import AverageList from "../widgets/AverageList";
 
@@ -18,14 +19,17 @@ export const ConsumptionPage = ({
 }) => {
   return (
     <>
-      <UsagePerDayChart data={monthData} />
-      <AverageList
-        monthlySpend={getTotalUsageByDeiceData}
-        averageSpend={monthlyAverages}
-        totalSpend={getTotalConsumption}
-        peopleCount={parseFloat(data.houses[0].apartments[0].people)}
-      />
-      <Link to="/flowless">Back</Link>
+      <MenuBar />
+      <div className="app">
+        <UsagePerDayChart data={monthData} />
+        <AverageList
+          monthlySpend={getTotalUsageByDeiceData}
+          averageSpend={monthlyAverages}
+          totalSpend={getTotalConsumption}
+          peopleCount={parseFloat(data.houses[0].apartments[0].people)}
+        />
+        <Link to="/flowless">Back</Link>
+      </div>
     </>
   );
 };
