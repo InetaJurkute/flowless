@@ -18,9 +18,6 @@ import {
 } from "@chakra-ui/icons";
 import { backgroundColor, blueColor, mediumGrayColor } from "../theme/colors";
 
-import { Image } from "@chakra-ui/image";
-
-import logo from "../logo.png";
 import { getAppIcon } from "./icons/WaterIcon";
 
 export const MenuBar = () => {

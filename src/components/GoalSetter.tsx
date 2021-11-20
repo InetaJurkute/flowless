@@ -17,6 +17,7 @@ import {
   FormErrorMessage,
   FormLabel,
 } from "@chakra-ui/form-control";
+import { backgroundColor, purpleMainColor } from "../theme/colors";
 
 export enum GoalType {
   Liters = "Liters",
@@ -151,7 +152,6 @@ export const GoalSetter = ({ data }: { data: DataSet }) => {
                   label={GoalType.Power.toString()}
                 />
               </Select>
-
               <Field name="monthlyGoalAmount">
                 {({ field, form }: any) => (
                   <FormControl
@@ -172,10 +172,14 @@ export const GoalSetter = ({ data }: { data: DataSet }) => {
                   </FormControl>
                 )}
               </Field>
-
-              <ErrorMessage name="monthlyGoalAmount" component="div" />
-
-              <Button type="submit">Set Goal</Button>
+              <ErrorMessage name="monthlyGoalAmount" component="div" />"
+              <Button
+                type="submit"
+                backgroundColor={purpleMainColor}
+                color={backgroundColor}
+              >
+                Set Goal
+              </Button>
             </Stack>
 
             {newGoalSet && values.monthlyGoalType === GoalType.Liters && (
@@ -187,7 +191,8 @@ export const GoalSetter = ({ data }: { data: DataSet }) => {
 
             {newGoalSet && values.monthlyGoalType === GoalType.Money && (
               <div>
-                You should use less than ~{litersGoal} liters to hit your budget goal!
+                You should use less than ~{litersGoal} liters to hit your budget
+                goal!
               </div>
             )}
           </Form>

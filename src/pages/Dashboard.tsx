@@ -7,7 +7,16 @@ import { WaterIcon } from "../components/icons/WaterIcon";
 import { MenuBar } from "../components/MenuBar";
 import { DataSet } from "../context/DataContext";
 import GoalContext from "../context/GoalContext";
-import { blueColor, mediumGrayColor } from "../theme/colors";
+import {
+  blueColor,
+  darkGreenColor,
+  lightBlueColor,
+  mediumGrayColor,
+  pinkLightColor,
+  purpleLightColor,
+  purpleMainColor,
+  yellowLightColor,
+} from "../theme/colors";
 import { AppliancePie } from "../charts/AppliancePie";
 import { SpendCard } from "../widgets/SpendCard";
 import { EnergyIcon } from "../components/icons/EnergyIcon";
@@ -32,7 +41,13 @@ export const Dashboard = ({
       <MenuBar />
       <div className="app">
         {/* До́брый ве́чер ( ͡° ͜ʖ ͡°) */}
-        <Heading textAlign="left" as="h1" size="xl" marginBottom="32px">
+        <Heading
+          textAlign="left"
+          as="h1"
+          size="xl"
+          marginBottom="32px"
+          color={blueColor}
+        >
           Dashboard
         </Heading>
         <div className="dashboard-wrapper">
@@ -63,6 +78,7 @@ export const Dashboard = ({
                       as="h2"
                       fontSize={{ base: "sm", md: "md" }}
                       margin="16px 0"
+                      color={blueColor}
                     >
                       Set your monthly consumption goals
                     </Heading>
@@ -78,8 +94,8 @@ export const Dashboard = ({
                   amount={getTotalConsumption}
                   measurementUnit="liters"
                   goalAmount={Number(litersGoal)}
-                  bgColor={mediumGrayColor}
-                  textColor={blueColor}
+                  bgColor={purpleMainColor}
+                  textColor={lightBlueColor}
                   onClick={() => navigate("/flowless/consumption")}
                 />
               </GridItem>
@@ -90,8 +106,8 @@ export const Dashboard = ({
                   amount={getTotalPowerConsumption}
                   measurementUnit="kWh"
                   goalAmount={Number(powerGoal)}
-                  bgColor={mediumGrayColor}
-                  textColor={blueColor}
+                  bgColor={darkGreenColor}
+                  textColor={yellowLightColor}
                   onClick={() => navigate("/flowless/power")}
                 />
               </GridItem>
@@ -102,8 +118,8 @@ export const Dashboard = ({
                   amount={22}
                   measurementUnit="EUR"
                   goalAmount={Number(moneyGoal)}
-                  bgColor={mediumGrayColor}
-                  textColor={blueColor}
+                  bgColor={purpleLightColor}
+                  textColor={darkGreenColor}
                   onClick={() => navigate("/flowless/spend")}
                 />
               </GridItem>
@@ -114,7 +130,7 @@ export const Dashboard = ({
                   amount={getTotalConsumption}
                   measurementUnit="liters"
                   goalAmount={120}
-                  bgColor={mediumGrayColor}
+                  bgColor={pinkLightColor}
                   textColor={blueColor}
                   hideContent={true}
                   onClick={() => navigate("/flowless/challenges")}

@@ -1,11 +1,11 @@
 import { Flex } from "@chakra-ui/react";
 import React from "react";
-import { blueColor } from "../../theme/colors";
+import { yellowLightColor } from "../../theme/colors";
 
 export const EnergyIcon = () => {
   return (
     <Flex
-      border={`2px solid ${blueColor}`}
+      border={`2px solid ${yellowLightColor}`}
       width="40px"
       height="40px"
       alignItems="center"
@@ -18,7 +18,7 @@ export const EnergyIcon = () => {
         height="24px"
         viewBox="0 0 24 24"
         width="24px"
-        fill={blueColor}
+        fill={yellowLightColor}
       >
         <g>
           <rect fill="none" height="24" width="24" />

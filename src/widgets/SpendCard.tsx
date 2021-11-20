@@ -36,7 +36,7 @@ export const SpendCard = ({
       padding="16px"
       onClick={onClick}
       cursor="pointer"
-      _hover={{ bg: "gray.300" }}
+      _hover={{ filter: "brightness(0.9)" }}
     >
       <Box>
         {icon && icon}

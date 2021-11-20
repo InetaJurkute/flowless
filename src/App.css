@@ -1,16 +1,18 @@
 .app {
-  margin: 44px 128px;
+  margin: 0;
+  padding: 44px 128px;
+  background-color: #FBFDFF;
 }
 
 @media (max-width: 1024px) {
   .app {
-    margin: 44px 64px;
+    padding: 44px 64px;
   }
 }
 
 @media (max-width: 480px) {
   .app {
-    margin: 32px 24px;
+    padding: 32px 24px;
   }
 }
 

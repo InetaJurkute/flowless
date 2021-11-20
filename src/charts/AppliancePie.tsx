@@ -4,6 +4,7 @@ import { Heading } from "@chakra-ui/layout";
 
 import { flowless } from "./theme";
 import { Appliance } from "../context/DataContext";
+import { blueColor } from "../theme/colors";
 
 interface AppliancePieProps {
   data: {
@@ -32,7 +33,7 @@ export const AppliancePie = ({ data }: AppliancePieProps) => {
 
   return (
     <div className="responsive-chart-wrapper">
-      <Heading as="h5" size="sm">
+      <Heading as="h5" size="sm" color={blueColor}>
         Your Water Consumption This Month In Liters
       </Heading>
       <ResponsivePie

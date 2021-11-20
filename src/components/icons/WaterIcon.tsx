@@ -1,6 +1,6 @@
 import { Flex } from "@chakra-ui/react";
 import React from "react";
-import { blueColor } from "../../theme/colors";
+import { lightBlueColor } from "../../theme/colors";
 
 export const getAppIcon = (color: string) => (
   <svg
@@ -19,14 +19,14 @@ export const getAppIcon = (color: string) => (
 export const WaterIcon = () => {
   return (
     <Flex
-      border={`2px solid ${blueColor}`}
+      border={`2px solid ${lightBlueColor}`}
       width="40px"
       height="40px"
       alignItems="center"
       justifyContent="center"
       borderRadius="lg"
     >
-      {getAppIcon(blueColor)}
+      {getAppIcon(lightBlueColor)}
     </Flex>
   );
 };

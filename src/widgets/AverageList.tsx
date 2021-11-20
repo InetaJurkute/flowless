@@ -1,5 +1,12 @@
 import { Grid, GridItem } from "@chakra-ui/react";
 import { Appliance } from "../context/DataContext";
+import {
+  nivoGreenColor,
+  nivoIvoryColor,
+  nivoOrangeColor,
+  nivoRedColor,
+  nivoYellowColor,
+} from "../theme/colors";
 import { HorizontalCard } from "./HorizontalCard";
 
 export interface AverageSpend {
@@ -45,6 +52,7 @@ const AverageList = (props: {
 
         <GridItem colStart={2} colEnd={3} rowStart={1} rowEnd={2}>
           <HorizontalCard
+            bgColor={nivoIvoryColor}
             customText="Current total water spend per person with your"
             measurementUnit="liters"
             amount={+cardData[0].diff.toFixed(2)}
@@ -55,6 +63,7 @@ const AverageList = (props: {
         </GridItem>
         <GridItem colStart={2} colEnd={3} rowStart={2} rowEnd={3}>
           <HorizontalCard
+            bgColor={nivoRedColor}
             customText="Current total water spend per person with your"
             measurementUnit="liters"
             amount={+cardData[1].diff.toFixed(2)}
@@ -66,6 +75,7 @@ const AverageList = (props: {
 
         <GridItem colStart={1} colEnd={2} rowStart={3} rowEnd={4}>
           <HorizontalCard
+            bgColor={nivoYellowColor}
             customText="Current total water spend per person with your"
             measurementUnit="liters"
             amount={+cardData[2].diff.toFixed(2)}
@@ -76,6 +86,7 @@ const AverageList = (props: {
         </GridItem>
         <GridItem colStart={2} colEnd={3} rowStart={3} rowEnd={4}>
           <HorizontalCard
+            bgColor={nivoOrangeColor}
             customText="Current total water spend per person with your"
             measurementUnit="liters"
             amount={+cardData[3].diff.toFixed(2)}
@@ -87,6 +98,7 @@ const AverageList = (props: {
 
         <GridItem colStart={1} colEnd={2} rowStart={2} rowEnd={3}>
           <HorizontalCard
+            bgColor={nivoGreenColor}
             customText="Current total water spend per person with your"
             measurementUnit="liters"
             amount={+cardData[4].diff.toFixed(2)}
