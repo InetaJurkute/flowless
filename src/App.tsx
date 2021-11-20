@@ -1,6 +1,6 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import React, { useContext, useMemo, useState } from "react";
-import sumBy from "lodash/sumBy";
+import sumBy from 'lodash/sumBy'
 
 import "./App.css";
 import DataContext, { currentDate, filterData } from "./context/DataContext";
@@ -13,11 +13,13 @@ import { getAverage } from "./utils";
 import { sum } from "lodash";
 import AverageList from "./widgets/AverageList";
 import { GoalSetter } from "./components/GoalSetter";
+import { ChallengesPage } from './pages/ChallengesPage'
 
 enum MenuCategory {
   Consumption = "Consumption",
   Spend = "Spend",
   Sustainability = "Sustainability",
+  Challenges = "Challenges",
 }
 
 function App() {
@@ -91,6 +93,7 @@ function App() {
             />
           </>
         )}
+        {activeCategory === MenuCategory.Challenges && <ChallengesPage />}
       </div>
     </ChakraProvider>
   );
