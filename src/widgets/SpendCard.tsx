@@ -43,16 +43,24 @@ export const SpendCard = ({
         </Text>
       </Box>
       <Box marginTop="32px">
-        <Text fontSize="sm" fontWeight="regular" display="inline">
-          {`out of `}
-        </Text>
-        <Text fontSize="sm" fontWeight="bold" display="inline">
-          {`${goalAmount} ${measurementUnit}`}
-        </Text>
-        <br />
-        <Text fontSize="sm" fontWeight="regular">
-          which is your set goal
-        </Text>
+        {goalAmount ? (
+          <>
+            <Text fontSize="sm" fontWeight="regular" display="inline">
+              {`out of `}
+            </Text>
+            <Text fontSize="sm" fontWeight="bold" display="inline">
+              {`${goalAmount} ${measurementUnit}`}
+            </Text>
+            <br />
+            <Text fontSize="sm" fontWeight="regular">
+              which is your set goal
+            </Text>
+          </>
+        ) : (
+          <Text fontSize="sm" fontWeight="regular">
+            No goal set
+          </Text>
+        )}
       </Box>
     </Flex>
   );

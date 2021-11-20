@@ -9,7 +9,7 @@ export interface Measurement {
   Consumption: string;
   Temp: string;
   FlowTime: string;
-  PowerConsumption: string;
+  Power_Consumption: string;
   TimeStamp: string;
 }
 
