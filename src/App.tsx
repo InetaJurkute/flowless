@@ -8,8 +8,9 @@ import { UsagePerDayChart } from "./charts/UsagePerDayChart";
 import { MenuCategoryStrip } from "./components/MenuCategoryStrip";
 
 enum MenuCategory {
-  Cat1 = "Cat1",
-  Cat2 = "Cat2",
+  Consumption = "Consumption",
+  Spend = "Spend",
+  Sustainability = "Sustainability",
 }
 
 function App() {
@@ -32,8 +33,10 @@ function App() {
           activeCategory={activeCategory}
           setActiveCategory={setActiveCategory}
         />
-        <TotalUsageByDeviceChart data={data} />
-        <UsagePerDayChart data={monthData} />
+        {activeCategory === null && <TotalUsageByDeviceChart data={data} />}
+        {activeCategory === MenuCategory.Consumption && (
+          <UsagePerDayChart data={monthData} />
+        )}
       </div>
     </ChakraProvider>
   );
