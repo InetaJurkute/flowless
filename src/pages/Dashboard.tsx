@@ -11,6 +11,7 @@ import { blueColor, mediumGrayColor } from "../theme/colors";
 import { AppliancePie } from "../charts/AppliancePie";
 import { SpendCard } from "../widgets/SpendCard";
 import { EnergyIcon } from "../components/icons/EnergyIcon";
+import { MoneyIcon } from "../components/icons/MoneyIcon";
 
 export const Dashboard = ({
   data,
@@ -86,7 +87,7 @@ export const Dashboard = ({
               </GridItem>
               <GridItem colStart={2} colEnd={3} rowStart={3} rowEnd={5}>
                 <SpendCard
-                  icon={<WaterIcon />}
+                  icon={<MoneyIcon />}
                   title="Spend"
                   amount={22}
                   measurementUnit="EUR"
