@@ -14,7 +14,7 @@ export const ChallengeCard = ({
   ...rest
 }: ChallengeCardProps) => {
   return (
-    <Button onClick={onClick}>
+    <Button onClick={onClick} minHeight="80px">
       <Box p={5} borderWidth="0px" {...rest}>
         <Heading fontSize="xl">{title}</Heading>
         <Text>{subtext}</Text>
