@@ -10,6 +10,11 @@ export const BackLink = () => {
       padding="10px 14px 10px 14px"
       borderWidth="1px"
       rounded="md"
+      style={{
+        marginTop: "10px",
+        display: "block",
+        maxWidth: "64px",
+      }}
     >
       Back
     </Link>
