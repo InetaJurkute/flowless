@@ -29,6 +29,7 @@ export const Dashboard = ({
       <MenuBar />
       <div className="app">
         <GoalSetter data={data} />
+        {/* До́брый ве́чер ( ͡° ͜ʖ ͡°) */}
         <Heading textAlign="left" as="h1" size="xl" marginBottom="32px">
           Welcome, <br />
           here's your dashboard
