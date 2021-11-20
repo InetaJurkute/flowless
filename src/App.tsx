@@ -44,7 +44,6 @@ function App() {
     ...applianceAverages,
     Total: sum(Object.values(applianceAverages)),
   } as AverageSpend;
-  const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
   const getTotalUsageByDeiceData = useMemo(() => {
     //USE THE FIRST ONE

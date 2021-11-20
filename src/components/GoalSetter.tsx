@@ -15,6 +15,7 @@ import { Stack } from "@chakra-ui/layout";
 export enum GoalType {
   Liters = "Liters",
   Money = "Budget",
+  Power = "Power",
 }
 
 interface MonthlyGoal {

@@ -60,7 +60,7 @@ export const Dashboard = ({
               <GridItem colStart={2} colEnd={3} rowStart={1} rowEnd={3}>
                 <SpendCard
                   icon={<WaterIcon />}
-                  title="Sustainability"
+                  title="Power and Sustainability"
                   amount={getTotalPowerConsumption}
                   measurementUnit="kWh"
                   goalAmount={120}
