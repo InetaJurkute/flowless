@@ -43,7 +43,7 @@ export const GithubContributionsChart = ({ data }: { data: DataSet }) => {
   return (
     <div className="responsive-chart-wrapper">
       <Heading as="h5" size="sm">
-        Consumptions by Day in 2020
+        Consumptions by Day in 2020 (L)
       </Heading>
       <ResponsiveCalendar
         data={dataForChart}

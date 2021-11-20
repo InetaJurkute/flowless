@@ -33,7 +33,7 @@ export const AppliancePie = ({ data }: AppliancePieProps) => {
   return (
     <div className="responsive-chart-wrapper">
       <Heading as="h5" size="sm">
-        Your Water Consumption This Month In Leters
+        Your Water Consumption This Month (L)
       </Heading>
       <ResponsivePie
         data={pieData}
@@ -42,48 +42,17 @@ export const AppliancePie = ({ data }: AppliancePieProps) => {
         padAngle={0.7}
         cornerRadius={3}
         activeOuterRadiusOffset={8}
-        colors={{ scheme: "nivo" }}
+        colors={{ scheme: 'nivo' }}
         theme={flowless}
         borderWidth={1}
         borderColor={{ from: "color" }}
         arcLinkLabelsSkipAngle={10}
         arcLinkLabelsTextColor="#333333"
         arcLinkLabelsThickness={2}
-        arcLinkLabelsColor={{ from: "color" }}
+        arcLinkLabelsColor={{ from: 'color' }}
         arcLabelsSkipAngle={10}
-        arcLabelsTextColor={{ from: "color", modifiers: [["brighter", 2]] }}
-        fill={[
-          {
-            match: {
-              id: Appliance.Dishwasher,
-            },
-            id: "dots",
-          },
-          {
-            match: {
-              id: Appliance.Faucet,
-            },
-            id: "dots",
-          },
-          {
-            match: {
-              id: Appliance.KitchenFaucet,
-            },
-            id: "dots",
-          },
-          {
-            match: {
-              id: Appliance.Shower,
-            },
-            id: "dots",
-          },
-          {
-            match: {
-              id: Appliance.WashingMachine,
-            },
-            id: "lines",
-          },
-        ]}
+        arcLabelsTextColor={{ from: 'color', modifiers: [["brighter", 2]] }}
+        valueFormat=" >-$.2f"
       />
     </div>
   );
