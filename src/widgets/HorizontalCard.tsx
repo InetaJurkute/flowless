@@ -11,6 +11,7 @@ interface SpendCardProps {
   hideContent?: boolean;
   customText: string;
   isAboveAverage?: boolean;
+  subTitle?: string;
 }
 
 export const HorizontalCard = ({
@@ -23,6 +24,7 @@ export const HorizontalCard = ({
   hideContent,
   customText,
   isAboveAverage,
+  subTitle,
 }: SpendCardProps) => {
   return (
     <Flex
@@ -43,9 +45,14 @@ export const HorizontalCard = ({
       </Box>
       <Box margin="18px 0 8px">
         {title && (
-          <Heading as="h2" fontSize={{ base: "lg", md: "xl" }}>
-            {title}
-          </Heading>
+          <>
+            <Heading as="h2" fontSize={{ base: "lg", md: "xl" }}>
+              {title}
+            </Heading>
+            <Text fontSize="sm" fontWeight="medium" display="inline">
+              {subTitle}
+            </Text>
+          </>
         )}
         <Text fontSize={{ base: "xl", md: "4xl" }} fontWeight="regular">
           {amount} {measurementUnit}
