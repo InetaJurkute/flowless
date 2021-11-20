@@ -14,11 +14,11 @@ export interface Measurement {
 }
 
 export enum Appliance {
-  Shower = "Hydractiva_shower",
-  KitchenFaucet = "Kitchen_optima_faucet",
-  Faucet = "Optima_faucet",
+  Shower = "Hydractiva Shower",
+  KitchenFaucet = "Kitchen Optima Faucet",
+  Faucet = "Optima Faucet",
   Dishwasher = "Dishwasher",
-  WashingMachine = "Washing_machine",
+  WashingMachine = "Washing Machine",
 }
 
 export interface ApartmentData {
