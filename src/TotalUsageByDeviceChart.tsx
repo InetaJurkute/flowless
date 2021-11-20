@@ -1,10 +1,10 @@
 import { ResponsiveRadar } from "@nivo/radar";
-import { ApplianceLabel } from "./applianceLabel";
 import { flowless } from "./charts/theme";
+import { Appliance } from "./context/DataContext";
 
 interface TotalUsageByDeviceChartProps {
   data: {
-    device: ApplianceLabel;
+    device: Appliance;
     total: number;
   }[];
 }
