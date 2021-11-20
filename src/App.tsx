@@ -1,6 +1,6 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import React, { useContext, useMemo, useState } from "react";
-import sumBy from 'lodash/sumBy'
+import sumBy from "lodash/sumBy";
 
 import "./App.css";
 import DataContext, { currentDate, filterData } from "./context/DataContext";
@@ -8,11 +8,10 @@ import { TotalUsageByDeviceChart } from "./TotalUsageByDeviceChart";
 import { UsagePerDayChart } from "./charts/UsagePerDayChart";
 import { MenuCategoryStrip } from "./components/MenuCategoryStrip";
 import { SpendCard } from "./widgets/SpendCard";
-import {
-  currentMonth,
-  Appliance,
-  Measurement,
-} from "./context/DataContext";
+import { currentMonth, Appliance, Measurement } from "./context/DataContext";
+import { getAverage } from "./utils";
+import { sum } from "lodash";
+import AverageList from "./widgets/AverageList";
 
 enum MenuCategory {
   Consumption = "Consumption",
@@ -30,6 +29,18 @@ function App() {
       currentDate.endOf("month").toString()
     );
   }, [data]);
+
+  const applianceAverages = {
+    [Appliance.Dishwasher]: getAverage(monthData, Appliance.Dishwasher),
+    [Appliance.Faucet]: getAverage(monthData, Appliance.Faucet),
+    [Appliance.KitchenFaucet]: getAverage(monthData, Appliance.KitchenFaucet),
+    [Appliance.Shower]: getAverage(monthData, Appliance.Shower),
+    [Appliance.WashingMachine]: getAverage(monthData, Appliance.WashingMachine),
+  };
+  const monthlyAverages = {
+    ...applianceAverages,
+    Total: sum(Object.values(applianceAverages)),
+  };
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
   const getTotalUsageByDeiceData = useMemo(() => {
@@ -52,8 +63,8 @@ function App() {
   }, [data.houses]);
 
   const getTotalConsumption = useMemo(() => {
-    return Math.floor(sumBy(getTotalUsageByDeiceData, x => x.total))
-  }, [data.houses])
+    return Math.floor(sumBy(getTotalUsageByDeiceData, (x) => x.total));
+  }, [data.houses]);
 
   return (
     <ChakraProvider>
@@ -64,9 +75,21 @@ function App() {
           setActiveCategory={setActiveCategory}
         />
         <SpendCard amount={getTotalConsumption} />
-        {activeCategory === null && <TotalUsageByDeviceChart data={getTotalUsageByDeiceData} />}
+        {activeCategory === null && (
+          <>
+            <TotalUsageByDeviceChart data={getTotalUsageByDeiceData} />
+          </>
+        )}
         {activeCategory === MenuCategory.Consumption && (
-          <UsagePerDayChart data={monthData} />
+          <>
+            <UsagePerDayChart data={monthData} />
+            <AverageList
+              monthlySpend={getTotalUsageByDeiceData}
+              averageSpend={monthlyAverages}
+              totalSpend={getTotalConsumption}
+              peopleCount={parseFloat(data.houses[0].apartments[0].people)}
+            />
+          </>
         )}
       </div>
     </ChakraProvider>
