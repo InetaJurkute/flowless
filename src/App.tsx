@@ -17,7 +17,7 @@ import { GoalSetter, GoalType } from "./components/GoalSetter";
 import { ChallengesPage } from "./pages/ChallengesPage";
 import GoalContext from "./context/GoalContext";
 import { PowerConsumptionPerDayChart } from "./charts/PowerConsuptionPerDayChart";
-import { GithubContributionsChart } from './charts/GithubContributionsChart'
+import { GithubContributionsChart } from "./charts/GithubContributionsChart";
 
 enum MenuCategory {
   Consumption = "Consumption",
@@ -135,12 +135,13 @@ function App() {
                 <GridItem colStart={1} colEnd={2} rowStart={4} rowEnd={6}>
                   <SpendCard
                     icon={<WaterIcon />}
-                    title="Water Consumption"
+                    title="Spend"
                     amount={getTotalConsumption}
                     measurementUnit="liters"
                     goalAmount={120}
                     bgColor={mediumGrayColor}
                     textColor={blueColor}
+                    onClick={() => setActiveCategory(MenuCategory.Spend)}
                   />
                 </GridItem>
                 <GridItem colStart={2} colEnd={3} rowStart={3} rowEnd={6}>
