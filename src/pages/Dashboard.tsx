@@ -12,6 +12,7 @@ import { AppliancePie } from "../charts/AppliancePie";
 import { SpendCard } from "../widgets/SpendCard";
 import { EnergyIcon } from "../components/icons/EnergyIcon";
 import { MoneyIcon } from "../components/icons/MoneyIcon";
+import { ChallengeIcon } from "../components/icons/ChallengeIcon";
 
 export const Dashboard = ({
   data,
@@ -74,7 +75,7 @@ export const Dashboard = ({
               </GridItem>
               <GridItem colStart={1} colEnd={2} rowStart={4} rowEnd={6}>
                 <SpendCard
-                  icon={<WaterIcon />}
+                  icon={<ChallengeIcon />}
                   title="Challenges"
                   amount={getTotalConsumption}
                   measurementUnit="liters"
@@ -99,7 +100,7 @@ export const Dashboard = ({
               </GridItem>
               <GridItem colStart={2} colEnd={3} rowStart={5} rowEnd={6}>
                 <SpendCard
-                  icon={<WaterIcon />}
+                  icon={<ChallengeIcon />}
                   title="Challenges"
                   amount={getTotalConsumption}
                   measurementUnit="liters"
