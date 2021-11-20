@@ -1,3 +1,5 @@
+import { Button } from "@chakra-ui/button";
+
 interface MenuCategoryStripProps {
   categories: string[];
   activeCategory: string | null;
@@ -18,13 +20,13 @@ export const MenuCategoryStrip = ({
   };
 
   const categoryButtons = categories.map((category, index) => (
-    <button
+    <Button
       key={index}
       onClick={() => onCategoryClick(category)}
-      style={{ color: category === activeCategory ? "red" : "grey" }}
+      style={{ backgroundColor: category === activeCategory ? "red" : "grey" }}
     >
       {category}
-    </button>
+    </Button>
   ));
 
   return <div>{categoryButtons}</div>;
