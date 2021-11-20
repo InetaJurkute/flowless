@@ -13,6 +13,7 @@ import {
 import { ChallengeCard } from "../widgets/ChallengeCard";
 import { Link } from "react-router-dom";
 import { MenuBar } from "../components/MenuBar";
+import { BackLink } from "../components/BackLink";
 
 export const ChallengesPage = () => {
   const [selectedChallenge, setSelectedChallenge] = useState<string | null>(
@@ -104,7 +105,7 @@ export const ChallengesPage = () => {
           Monthly
         </Heading>
         <Stack spacing={8}>{mapChallenges(monthlyChallenges)}</Stack>
-        <Link to="/flowless">Back</Link>
+        <BackLink />
 
         <Modal
           isOpen={Boolean(selectedChallenge)}
