@@ -1,6 +1,5 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import React, { useContext, useState } from "react";
-import { Box } from "@chakra-ui/layout";
+import React, { useContext, useMemo, useState } from "react";
 
 import "./App.css";
 import DataContext, { currentDate, filterData } from "./context/DataContext";
@@ -16,18 +15,23 @@ enum MenuCategory {
 function App() {
   const data = useContext(DataContext);
 
-  const monthData = filterData(
-    data,
-    currentDate.startOf("month").toString(),
-    currentDate.endOf("month").toString()
-  );
+  const monthData = useMemo(() => {
+    return filterData(
+      data,
+      currentDate.startOf("month").toString(),
+      currentDate.endOf("month").toString()
+    );
+  }, [data]);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
-
-  console.log("activeCAtegory", activeCategory);
 
   return (
     <ChakraProvider>
       <div className="App">
+        <MenuCategoryStrip
+          categories={Object.values(MenuCategory)}
+          activeCategory={activeCategory}
+          setActiveCategory={setActiveCategory}
+        />
         <TotalUsageByDeviceChart data={data} />
         <UsagePerDayChart data={monthData} />
       </div>
