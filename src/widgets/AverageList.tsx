@@ -1,4 +1,5 @@
 import { Appliance } from "../context/DataContext";
+import { HorizontalCard } from "./HorizontalCard";
 
 export interface AverageSpend {
   [Appliance.Dishwasher]: number;
@@ -16,8 +17,16 @@ const AverageList = (props: {
   peopleCount: number;
 }) => {
   const diff = props.totalSpend / props.peopleCount - props.averageSpend.Total;
+  const isAboveAverage = diff > 0;
   return (
     <>
+      <HorizontalCard
+        customText="Current total water spend per person this month is"
+        measurementUnit="liters"
+        amount={+diff.toFixed(2)}
+        isAboveAverage={isAboveAverage}
+        title="test"
+      />
       {diff > 0 ? (
         <li>
           Current total water spend per person this month is {diff.toFixed(2)}L
