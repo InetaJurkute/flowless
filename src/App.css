@@ -1,5 +1,5 @@
 .app {
-    margin: 44px 128px;
+  margin: 44px 128px;
 }
 
 @media (max-width: 1024px) {
@@ -68,7 +68,6 @@
 
 .responsive-chart-wrapper {
   height: 400px;
-  max-width: 50vw;
 }
 
 @media (max-width: 1280px) {
