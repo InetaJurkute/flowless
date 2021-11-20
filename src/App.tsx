@@ -1,6 +1,7 @@
 import { Box, ChakraProvider, Grid, GridItem, Heading } from "@chakra-ui/react";
 import React, { useContext, useMemo, useState } from "react";
 import sumBy from "lodash/sumBy";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import "./App.css";
 import DataContext, { currentDate, filterData } from "./context/DataContext";
@@ -12,16 +13,16 @@ import { blueColor, mediumGrayColor } from "./theme/colors";
 import { TotalUsageByDeviceChart } from "./TotalUsageByDeviceChart";
 import { getAverage } from "./utils";
 import { sum } from "lodash";
-import AverageList from "./widgets/AverageList";
+import AverageList, { AverageSpend } from "./widgets/AverageList";
 import { GoalSetter, GoalType } from "./components/GoalSetter";
 import { MenuBar } from "./components/MenuBar";
 import { ChallengesPage } from "./pages/ChallengesPage";
 import GoalContext from "./context/GoalContext";
 import { PowerConsumptionPerDayChart } from "./charts/PowerConsuptionPerDayChart";
 import { GithubContributionsChart } from "./charts/GithubContributionsChart";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Dashboard } from "./pages/Dashboard";
 import { ConsumptionPage } from "./pages/ConsumptionPage";
+import { labelMap } from "./applianceLabel";
 
 enum MenuCategory {
   Consumption = "Consumption",
@@ -48,16 +49,25 @@ function App() {
   }, [data]);
 
   const applianceAverages = {
-    [Appliance.Dishwasher]: getAverage(monthData, Appliance.Dishwasher),
-    [Appliance.Faucet]: getAverage(monthData, Appliance.Faucet),
-    [Appliance.KitchenFaucet]: getAverage(monthData, Appliance.KitchenFaucet),
-    [Appliance.Shower]: getAverage(monthData, Appliance.Shower),
-    [Appliance.WashingMachine]: getAverage(monthData, Appliance.WashingMachine),
+    [labelMap.get(Appliance.Dishwasher)!]: getAverage(
+      monthData,
+      Appliance.Dishwasher
+    ),
+    [labelMap.get(Appliance.Faucet)!]: getAverage(monthData, Appliance.Faucet),
+    [labelMap.get(Appliance.KitchenFaucet)!]: getAverage(
+      monthData,
+      Appliance.KitchenFaucet
+    ),
+    [labelMap.get(Appliance.Shower)!]: getAverage(monthData, Appliance.Shower),
+    [labelMap.get(Appliance.WashingMachine)!]: getAverage(
+      monthData,
+      Appliance.WashingMachine
+    ),
   };
   const monthlyAverages = {
     ...applianceAverages,
     Total: sum(Object.values(applianceAverages)),
-  };
+  } as AverageSpend;
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
   const getTotalUsageByDeiceData = useMemo(() => {
@@ -69,7 +79,7 @@ function App() {
         (m) => m.TimeStamp >= currentMonth.toString()
       );
       return {
-        device,
+        device: labelMap.get(device)!,
         total: sumBy(myMeasurements, (x) =>
           parseFloat((x as Measurement).Consumption)
         ),

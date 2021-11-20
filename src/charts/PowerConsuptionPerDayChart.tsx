@@ -9,6 +9,7 @@ import {
   filterData,
   Measurement,
 } from "../context/DataContext";
+import { flowless } from "./theme";
 
 const barColors = {
   [`${Appliance.Dishwasher}Color`]: "hsl(345, 70%, 50%)",
@@ -70,6 +71,7 @@ export const PowerConsumptionPerDayChart = ({ data }: { data: DataSet }) => {
         margin={{ top: 70, right: 180, bottom: 40, left: 80 }}
         borderColor={{ from: "color" }}
         enableLabel={false}
+        theme={flowless}
         legends={[
           {
             dataFrom: "keys",
