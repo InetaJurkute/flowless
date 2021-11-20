@@ -41,7 +41,7 @@ export const GithubContributionsChart = ({ data }: { data: DataSet }) => {
   }, [data]);
 
   return (
-    <div className="responsive-chart-wrapper">
+    <div className="responsive-chart-wrapper" style={{ height: 250 }}>
       <Heading as="h5" size="sm">
         Consumptions by Day in 2020 in Liters
       </Heading>
