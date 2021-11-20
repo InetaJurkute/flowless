@@ -2,10 +2,10 @@ import React, { createContext } from "react";
 import data from "./db.json";
 
 export interface Measurement {
-  Consumption: number;
-  Temp: number;
-  FlowTime: number;
-  PowerConsumption: number;
+  Consumption: string;
+  Temp: string;
+  FlowTime: string;
+  PowerConsumption: string;
   TimeStamp: string;
 }
 
