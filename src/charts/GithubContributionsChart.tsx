@@ -1,3 +1,4 @@
+import { Heading } from "@chakra-ui/layout";
 import { ResponsiveCalendar } from "@nivo/calendar";
 import { useMemo } from "react";
 import { Appliance, DataSet, Measurement } from "../context/DataContext";
@@ -33,12 +34,17 @@ export const GithubContributionsChart = ({ data }: { data: DataSet }) => {
       processMeasurements
     );
 
-    return Object.entries(dateMap).map((kv) => ({ day: kv[0], value: kv[1] }));
+    return Object.entries(dateMap).map((kv) => ({
+      day: kv[0],
+      value: +kv[1].toFixed(2),
+    }));
   }, [data]);
 
   return (
     <div className="responsive-chart-wrapper">
-      <h3>Consumptions by Day in 2020</h3>
+      <Heading as="h5" size="sm">
+        Consumptions by Day in 2020
+      </Heading>
       <ResponsiveCalendar
         data={dataForChart}
         from="2020-01-01"

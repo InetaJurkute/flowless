@@ -8,8 +8,9 @@ import { MenuBar } from "../components/MenuBar";
 import { DataSet } from "../context/DataContext";
 import GoalContext from "../context/GoalContext";
 import { blueColor, mediumGrayColor } from "../theme/colors";
-import { TotalUsageByDeviceChart } from "../TotalUsageByDeviceChart";
+import { AppliancePie } from "../charts/AppliancePie";
 import { SpendCard } from "../widgets/SpendCard";
+import { EnergyIcon } from "../components/icons/EnergyIcon";
 
 export const Dashboard = ({
   data,
@@ -36,7 +37,8 @@ export const Dashboard = ({
         </Heading>
         <div className="dashboard-wrapper">
           <div className="flex-bigger">
-            <TotalUsageByDeviceChart data={getTotalUsageByDeiceData} />
+            {/* <TotalUsageByDeviceChart data={getTotalUsageByDeiceData} /> */}
+            <AppliancePie data={getTotalUsageByDeiceData} />
             <GithubContributionsChart data={data} />
           </div>
           <div className="flex-small">
@@ -59,7 +61,7 @@ export const Dashboard = ({
               </GridItem>
               <GridItem colStart={2} colEnd={3} rowStart={1} rowEnd={3}>
                 <SpendCard
-                  icon={<WaterIcon />}
+                  icon={<EnergyIcon />}
                   title="Energy and Sustainability"
                   amount={getTotalPowerConsumption}
                   measurementUnit="kWh"
