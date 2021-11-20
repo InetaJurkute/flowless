@@ -52,7 +52,7 @@ export const GithubContributionsChart = ({ data }: { data: DataSet }) => {
         emptyColor="#eeeeee"
         colors={["#61cdbb", "#97e3d5", "#e8c1a0", "#f47560"]}
         minValue={0}
-        margin={{ top: 40, right: 40, bottom: 40, left: 40 }}
+        margin={{ top: 20, right: 40, bottom: 20, left: 20 }}
         yearSpacing={40}
         monthBorderColor="#ffffff"
         dayBorderWidth={2}
