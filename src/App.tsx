@@ -113,17 +113,21 @@ function App() {
                     goalAmount={Number(litersGoal)}
                     bgColor={mediumGrayColor}
                     textColor={blueColor}
+                    onClick={() => setActiveCategory(MenuCategory.Consumption)}
                   />
                 </GridItem>
                 <GridItem colStart={2} colEnd={3} rowStart={1} rowEnd={3}>
                   <SpendCard
                     icon={<WaterIcon />}
-                    title="Water Consumption"
+                    title="Sustainability"
                     amount={getTotalConsumption}
                     measurementUnit="liters"
                     goalAmount={120}
                     bgColor={mediumGrayColor}
                     textColor={blueColor}
+                    onClick={() =>
+                      setActiveCategory(MenuCategory.Sustainability)
+                    }
                   />
                 </GridItem>
                 <GridItem colStart={1} colEnd={2} rowStart={4} rowEnd={6}>
@@ -140,12 +144,13 @@ function App() {
                 <GridItem colStart={2} colEnd={3} rowStart={3} rowEnd={6}>
                   <SpendCard
                     icon={<WaterIcon />}
-                    title="Water Consumption"
+                    title="Challenges"
                     amount={getTotalConsumption}
                     measurementUnit="liters"
                     goalAmount={120}
                     bgColor={mediumGrayColor}
                     textColor={blueColor}
+                    onClick={() => setActiveCategory(MenuCategory.Challenges)}
                   />
                 </GridItem>
               </Grid>
