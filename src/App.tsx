@@ -14,7 +14,6 @@ import GoalContext from "./context/GoalContext";
 import { PowerConsumptionPerDayChart } from "./charts/PowerConsuptionPerDayChart";
 import { Dashboard } from "./pages/Dashboard";
 import { ConsumptionPage } from "./pages/ConsumptionPage";
-import { labelMap } from "./applianceLabel";
 import { AverageSpend } from "./widgets/AverageList";
 
 function App() {
