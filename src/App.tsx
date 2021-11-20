@@ -88,7 +88,7 @@ function App() {
         (m) => m.TimeStamp >= currentMonth.toString()
       );
       return {
-        device: labelMap.get(device)!,
+        device,
         total: sumBy(myMeasurements, (x) =>
           parseFloat((x as Measurement).Power_Consumption)
         ),
