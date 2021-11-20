@@ -59,7 +59,7 @@ export const UsagePerDayChart = ({ data }: { data: DataSet }) => {
   const chartData = getUsagePerDayData;
 
   return (
-    <div style={{ height: 500 }}>
+    <div className="responsive-chart-wrapper">
       <h3>Consumption Per Day By Device</h3>
       <ResponsiveBar
         data={chartData}
