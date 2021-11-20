@@ -16,6 +16,7 @@ import AverageList from "./widgets/AverageList";
 import { GoalSetter, GoalType } from "./components/GoalSetter";
 import { ChallengesPage } from "./pages/ChallengesPage";
 import GoalContext from "./context/GoalContext";
+import { PowerConsumptionPerDayChart } from "./charts/PowerConsuptionPerDayChart";
 
 enum MenuCategory {
   Consumption = "Consumption",
@@ -235,6 +236,9 @@ function App() {
                 peopleCount={parseFloat(data.houses[0].apartments[0].people)}
               />
             </>
+          )}
+          {activeCategory === MenuCategory.Sustainability && (
+            <PowerConsumptionPerDayChart data={monthData} />
           )}
           {activeCategory === MenuCategory.Challenges && <ChallengesPage />}
         </div>
