@@ -1,7 +1,7 @@
 import { ResponsiveRadar } from "@nivo/radar";
 import { useMemo } from "react";
 import { sumBy } from "lodash";
-import { DataSet, Measurement } from "./context/DataContext";
+import { DataSet, KitchenAppliance, Measurement } from "./context/DataContext";
 
 interface TotalUsageByDeviceChartProps {
   data: DataSet;
@@ -14,15 +14,7 @@ export const TotalUsageByDeviceChart = ({
     //USE THE FIRST ONE
     const myApartmentData = data.houses[0].apartments[0];
 
-    const devices = [
-      "Hydractiva_shower",
-      "Kitchen_optima_faucet",
-      "Optima_faucet",
-      "Washing_machine",
-      "Dishwasher",
-    ];
-
-    const summedData = devices.map((device) => ({
+    const summedData = Object.values(KitchenAppliance).map((device) => ({
       device,
       total: sumBy(myApartmentData[device].measurements, (x) =>
         parseFloat((x as Measurement).Consumption)
@@ -30,7 +22,7 @@ export const TotalUsageByDeviceChart = ({
     }));
 
     return summedData;
-  }, []); // update dependencies
+  }, [data.houses]);
 
   const radarChartData = getTotalUsageByDeiceData;
 
