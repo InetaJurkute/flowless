@@ -1,7 +1,12 @@
 import { ResponsiveRadar } from "@nivo/radar";
 import { useMemo } from "react";
 import { sumBy } from "lodash";
-import { DataSet, Measurement } from "./context/DataContext";
+import {
+  currentMonth,
+  DataSet,
+  Appliance,
+  Measurement,
+} from "./context/DataContext";
 
 interface TotalUsageByDeviceChartProps {
   data: DataSet;
@@ -14,37 +19,34 @@ export const TotalUsageByDeviceChart = ({
     //USE THE FIRST ONE
     const myApartmentData = data.houses[0].apartments[0];
 
-    const devices = [
-      "Hydractiva_shower",
-      "Kitchen_optima_faucet",
-      "Optima_faucet",
-      "Washing_machine",
-      "Dishwasher",
-    ];
-
-    const summedData = devices.map((device) => ({
-      device,
-      total: sumBy(myApartmentData[device].measurements, (x) =>
-        parseFloat((x as Measurement).Consumption)
-      ),
-    }));
+    const summedData = Object.values(Appliance).map((device) => {
+      const myMeasurements = myApartmentData[device].measurements.filter(
+        (m) => m.TimeStamp >= currentMonth.toString()
+      );
+      return {
+        device,
+        total: sumBy(myMeasurements, (x) =>
+          parseFloat((x as Measurement).Consumption)
+        ),
+      };
+    });
 
     return summedData;
-  }, []); // update dependencies
+  }, [data.houses]);
 
   const radarChartData = getTotalUsageByDeiceData;
 
   return (
-    <div style={{ height: 500 }}>
-      <h3>Total Consumption By Device</h3>
+    <div className="responsive-chart-wrapper">
+      <h3>Total Consumption For Current Month</h3>
       <ResponsiveRadar
         data={radarChartData}
         keys={["total"]}
         indexBy="device"
         valueFormat=">-.2f"
-        margin={{ top: 70, right: 80, bottom: 40, left: 80 }}
+        margin={{ top: 60, right: 80, bottom: 60, left: 80 }}
         borderColor={{ from: "color" }}
-        gridLabelOffset={36}
+        gridLabelOffset={24}
         dotSize={10}
         dotColor={{ theme: "background" }}
         dotBorderWidth={2}
@@ -53,10 +55,10 @@ export const TotalUsageByDeviceChart = ({
         motionConfig="wobbly"
         legends={[
           {
-            anchor: "top-left",
+            anchor: "bottom",
             direction: "column",
             translateX: -50,
-            translateY: -40,
+            translateY: -60,
             itemWidth: 80,
             itemHeight: 20,
             itemTextColor: "#999",

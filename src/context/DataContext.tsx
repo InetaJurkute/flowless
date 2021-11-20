@@ -1,8 +1,9 @@
 import { createContext } from "react";
-import data from "./db.json";
 import { DateTime } from "luxon";
+import data from "./db.json";
 
 export const currentDate = DateTime.now().minus({ years: 1 });
+export const currentMonth = currentDate.startOf("month");
 
 export interface Measurement {
   Consumption: string;
@@ -12,7 +13,7 @@ export interface Measurement {
   TimeStamp: string;
 }
 
-export enum Applience {
+export enum Appliance {
   Shower = "Hydractiva_shower",
   KitchenFaucet = "Kitchen_optima_faucet",
   Faucet = "Optima_faucet",
@@ -23,11 +24,11 @@ export enum Applience {
 export interface ApartmentData {
   [index: string]: any;
   people: string;
-  [Applience.Shower]: { measurements: Measurement[] };
-  [Applience.KitchenFaucet]: { measurements: Measurement[] };
-  [Applience.Faucet]: { measurements: Measurement[] };
-  [Applience.Dishwasher]: { measurements: Measurement[] };
-  [Applience.WashingMachine]: { measurements: Measurement[] };
+  [Appliance.Shower]: { measurements: Measurement[] };
+  [Appliance.KitchenFaucet]: { measurements: Measurement[] };
+  [Appliance.Faucet]: { measurements: Measurement[] };
+  [Appliance.Dishwasher]: { measurements: Measurement[] };
+  [Appliance.WashingMachine]: { measurements: Measurement[] };
 }
 
 export interface HouseData {
@@ -43,28 +44,28 @@ export const filterData = (data: DataSet, from?: string, to?: string) => {
   data.houses[0].apartments.forEach((a) => {
     filteredDataSet.houses[0].apartments.push({
       ...a,
-      [Applience.Shower]: {
-        measurements: a[Applience.Shower].measurements.filter(
+      [Appliance.Shower]: {
+        measurements: a[Appliance.Shower].measurements.filter(
           (m) => (!to || m.TimeStamp <= to) && (!from || m.TimeStamp >= from)
         ),
       },
-      [Applience.KitchenFaucet]: {
-        measurements: a[Applience.KitchenFaucet].measurements.filter(
+      [Appliance.KitchenFaucet]: {
+        measurements: a[Appliance.KitchenFaucet].measurements.filter(
           (m) => (!to || m.TimeStamp <= to) && (!from || m.TimeStamp >= from)
         ),
       },
-      [Applience.Faucet]: {
-        measurements: a[Applience.Faucet].measurements.filter(
+      [Appliance.Faucet]: {
+        measurements: a[Appliance.Faucet].measurements.filter(
           (m) => (!to || m.TimeStamp <= to) && (!from || m.TimeStamp >= from)
         ),
       },
-      [Applience.Dishwasher]: {
-        measurements: a[Applience.Dishwasher].measurements.filter(
+      [Appliance.Dishwasher]: {
+        measurements: a[Appliance.Dishwasher].measurements.filter(
           (m) => (!to || m.TimeStamp <= to) && (!from || m.TimeStamp >= from)
         ),
       },
-      [Applience.WashingMachine]: {
-        measurements: a[Applience.WashingMachine].measurements.filter(
+      [Appliance.WashingMachine]: {
+        measurements: a[Appliance.WashingMachine].measurements.filter(
           (m) => (!to || m.TimeStamp <= to) && (!from || m.TimeStamp >= from)
         ),
       },

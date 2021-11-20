@@ -14,6 +14,7 @@
     "@testing-library/user-event": "^12.1.10",
     "@types/jest": "^26.0.15",
     "@types/lodash": "^4.14.177",
+    "@types/luxon": "^2.0.7",
     "@types/node": "^12.0.0",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
@@ -27,7 +28,7 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts start --max_old_space_size=2048",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

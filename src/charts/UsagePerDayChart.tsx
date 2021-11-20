@@ -4,17 +4,17 @@ import { useMemo } from "react";
 import {
   currentDate,
   DataSet,
-  Applience,
+  Appliance,
   filterData,
   Measurement,
 } from "../context/DataContext";
 
 const barColors = {
-  [`${Applience.Dishwasher}Color`]: "hsl(345, 70%, 50%)",
-  [`${Applience.Faucet}Color`]: "hsl(345, 70%, 50%)",
-  [`${Applience.KitchenFaucet}Color`]: "hsl(345, 70%, 50%)",
-  [`${Applience.Shower}Color`]: "hsl(345, 70%, 50%)",
-  [`${Applience.WashingMachine}Color`]: "hsl(345, 70%, 50%)",
+  [`${Appliance.Dishwasher}Color`]: "hsl(345, 70%, 50%)",
+  [`${Appliance.Faucet}Color`]: "hsl(345, 70%, 50%)",
+  [`${Appliance.KitchenFaucet}Color`]: "hsl(345, 70%, 50%)",
+  [`${Appliance.Shower}Color`]: "hsl(345, 70%, 50%)",
+  [`${Appliance.WashingMachine}Color`]: "hsl(345, 70%, 50%)",
 };
 
 export const UsagePerDayChart = ({ data }: { data: DataSet }) => {
@@ -28,24 +28,24 @@ export const UsagePerDayChart = ({ data }: { data: DataSet }) => {
       );
       chartData.push({
         day: i,
-        [Applience.Dishwasher]: sumBy(
-          dayData.houses[0].apartments[0][Applience.Dishwasher].measurements,
+        [Appliance.Dishwasher]: sumBy(
+          dayData.houses[0].apartments[0][Appliance.Dishwasher].measurements,
           (x) => parseFloat((x as Measurement).Consumption)
         ),
-        [Applience.Faucet]: sumBy(
-          dayData.houses[0].apartments[0][Applience.Faucet].measurements,
+        [Appliance.Faucet]: sumBy(
+          dayData.houses[0].apartments[0][Appliance.Faucet].measurements,
           (x) => parseFloat((x as Measurement).Consumption)
         ),
-        [Applience.KitchenFaucet]: sumBy(
-          dayData.houses[0].apartments[0][Applience.KitchenFaucet].measurements,
+        [Appliance.KitchenFaucet]: sumBy(
+          dayData.houses[0].apartments[0][Appliance.KitchenFaucet].measurements,
           (x) => parseFloat((x as Measurement).Consumption)
         ),
-        [Applience.Shower]: sumBy(
-          dayData.houses[0].apartments[0][Applience.Shower].measurements,
+        [Appliance.Shower]: sumBy(
+          dayData.houses[0].apartments[0][Appliance.Shower].measurements,
           (x) => parseFloat((x as Measurement).Consumption)
         ),
-        [Applience.WashingMachine]: sumBy(
-          dayData.houses[0].apartments[0][Applience.WashingMachine]
+        [Appliance.WashingMachine]: sumBy(
+          dayData.houses[0].apartments[0][Appliance.WashingMachine]
             .measurements,
           (x) => parseFloat((x as Measurement).Consumption)
         ),
@@ -63,7 +63,7 @@ export const UsagePerDayChart = ({ data }: { data: DataSet }) => {
       <h3>Consumption Per Day By Device</h3>
       <ResponsiveBar
         data={chartData}
-        keys={Object.values(Applience)}
+        keys={Object.values(Appliance)}
         indexBy="day"
         valueFormat=">-.2f"
         margin={{ top: 70, right: 180, bottom: 40, left: 80 }}
