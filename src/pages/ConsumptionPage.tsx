@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { UsagePerDayChart } from "../charts/UsagePerDayChart";
+import { BackLink } from "../components/BackLink";
 import { MenuBar } from "../components/MenuBar";
 import { DataSet } from "../context/DataContext";
 import AverageList from "../widgets/AverageList";
@@ -28,7 +29,7 @@ export const ConsumptionPage = ({
           totalSpend={getTotalConsumption}
           peopleCount={parseFloat(data.houses[0].apartments[0].people)}
         />
-        <Link to="/flowless">Back</Link>
+        <BackLink />
       </div>
     </>
   );
