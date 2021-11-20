@@ -1,4 +1,4 @@
-import { Grid, GridItem, Heading } from "@chakra-ui/layout";
+import { Box, Flex, Grid, GridItem, Heading } from "@chakra-ui/layout";
 import { useContext } from "react";
 import { useNavigate } from "react-router";
 import { GithubContributionsChart } from "../charts/GithubContributionsChart";
@@ -31,7 +31,6 @@ export const Dashboard = ({
     <>
       <MenuBar />
       <div className="app">
-        <GoalSetter data={data} />
         {/* До́брый ве́чер ( ͡° ͜ʖ ͡°) */}
         <Heading textAlign="left" as="h1" size="xl" marginBottom="32px">
           Welcome, <br />
@@ -46,10 +45,35 @@ export const Dashboard = ({
           <div className="flex-small">
             <Grid
               gap={4}
-              templateRows="repeat(5, 1fr)"
+              templateRows="repeat(6, 1fr)"
               templateColumns="repeat(2, 1fr)"
             >
-              <GridItem colStart={1} colEnd={2} rowStart={1} rowEnd={4}>
+              <GridItem colStart={2} colEnd={2} rowStart={1} rowEnd={4}>
+                <Flex
+                  height="100%"
+                  justifyContent="space-between"
+                  boxShadow="base"
+                  flexDirection="column"
+                  borderRadius="lg"
+                  bg={mediumGrayColor}
+                  color={blueColor}
+                  padding="16px"
+                  _hover={{ bg: "gray.300" }}
+                >
+                  <Box>
+                    <Heading
+                      as="h2"
+                      fontSize={{ base: "sm", md: "md" }}
+                      margin="16px 0"
+                    >
+                      Set your water liter consumption goal or budget
+                    </Heading>
+                  </Box>
+                  <GoalSetter data={data} />
+                </Flex>
+              </GridItem>
+
+              <GridItem colStart={1} colEnd={2} rowStart={1} rowEnd={5}>
                 <SpendCard
                   icon={<WaterIcon />}
                   title="Water Consumption"
@@ -61,7 +85,7 @@ export const Dashboard = ({
                   onClick={() => navigate("/flowless/consumption")}
                 />
               </GridItem>
-              <GridItem colStart={2} colEnd={3} rowStart={1} rowEnd={3}>
+              <GridItem colStart={2} colEnd={3} rowStart={4} rowEnd={7}>
                 <SpendCard
                   icon={<EnergyIcon />}
                   title="Energy and Sustainability"
@@ -73,20 +97,7 @@ export const Dashboard = ({
                   onClick={() => navigate("/flowless/power")}
                 />
               </GridItem>
-              <GridItem colStart={1} colEnd={2} rowStart={4} rowEnd={6}>
-                <SpendCard
-                  icon={<ChallengeIcon />}
-                  title="Challenges"
-                  amount={getTotalConsumption}
-                  measurementUnit="liters"
-                  goalAmount={120}
-                  bgColor={mediumGrayColor}
-                  textColor={blueColor}
-                  hideContent={true}
-                  onClick={() => navigate("/flowless/challenges")}
-                />
-              </GridItem>
-              <GridItem colStart={2} colEnd={3} rowStart={3} rowEnd={5}>
+              <GridItem colStart={1} colEnd={2} rowStart={5} rowEnd={9}>
                 <SpendCard
                   icon={<MoneyIcon />}
                   title="Spend"
@@ -98,7 +109,7 @@ export const Dashboard = ({
                   onClick={() => navigate("/flowless/spend")}
                 />
               </GridItem>
-              <GridItem colStart={2} colEnd={3} rowStart={5} rowEnd={6}>
+              <GridItem colStart={2} colEnd={3} rowStart={7} rowEnd={9}>
                 <SpendCard
                   icon={<ChallengeIcon />}
                   title="Challenges"

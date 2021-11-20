@@ -11,6 +11,12 @@ import { useContext, useState } from "react";
 import GoalContext from "../context/GoalContext";
 import { Select } from "@chakra-ui/select";
 import { Stack } from "@chakra-ui/layout";
+import { Input } from "@chakra-ui/input";
+import {
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+} from "@chakra-ui/form-control";
 
 export enum GoalType {
   Liters = "Liters",
@@ -127,6 +133,7 @@ export const GoalSetter = ({ data }: { data: DataSet }) => {
                 value={values.monthlyGoalType}
                 onChange={handleChange}
                 onBlur={handleBlur}
+                style={{ backgroundColor: "white" }}
               >
                 <option
                   value={GoalType.Liters.toString()}
@@ -142,15 +149,27 @@ export const GoalSetter = ({ data }: { data: DataSet }) => {
                 />
               </Select>
 
-              <Field
-                type="text"
-                name="monthlyGoalAmount"
-                style={{ backgroundColor: "yellow" }}
-                onChange={(values: any) => {
-                  setNewGoalSet(false);
-                  handleChange(values);
-                }}
-              />
+              <Field name="monthlyGoalAmount">
+                {({ field, form }: any) => (
+                  <FormControl
+                    isInvalid={form.errors.name && form.touched.name}
+                  >
+                    <Input
+                      {...field}
+                      id="name"
+                      type="text"
+                      name="monthlyGoalAmount"
+                      style={{ backgroundColor: "white" }}
+                      onChange={(values: any) => {
+                        setNewGoalSet(false);
+                        handleChange(values);
+                      }}
+                    />
+                    <FormErrorMessage>{form.errors.name}</FormErrorMessage>
+                  </FormControl>
+                )}
+              </Field>
+
               <ErrorMessage name="monthlyGoalAmount" component="div" />
 
               <Button type="submit">Set Goal</Button>
@@ -164,7 +183,7 @@ export const GoalSetter = ({ data }: { data: DataSet }) => {
             )}
 
             {newGoalSet && values.monthlyGoalType === GoalType.Money && (
-              <div>You should use ~{litersGoal} to hit your budget goal!</div>
+              <div>You should use ~{litersGoal} liters to hit your budget goal!</div>
             )}
           </Form>
         )}
