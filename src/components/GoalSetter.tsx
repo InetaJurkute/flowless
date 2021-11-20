@@ -5,14 +5,14 @@ import {
   DataSet,
   Measurement,
 } from "../context/DataContext";
-import { Form, Formik, Field, ErrorMessage } from "formik";
+import { Form, Formik, Field, ErrorMessage, useFormikContext } from "formik";
 import { sumBy } from "lodash";
 import { useContext, useState } from "react";
 import GoalContext from "../context/GoalContext";
 
 export enum GoalType {
   Liters = "Liters",
-  Money = "Money",
+  Money = "Budget",
 }
 
 interface MonthlyGoal {
@@ -68,25 +68,37 @@ const getForecastedMoney = (values: MonthlyGoal, data: DataSet) => {
   return priceForWater + priceHeating;
 };
 
+const getForecastedLiters = (values: MonthlyGoal, data: DataSet) => {
+  const goalMoney = parseInt(values.monthlyGoalAmount);
+
+  const energyNeededToHeatOneLiter = getAverageHeatingForLiterOfWater(data, 12);
+  const price = energyNeededToHeatOneLiter * electricityPrice + waterLiterPrice;
+
+  return goalMoney / price;
+};
+
 export const GoalSetter = ({ data }: { data: DataSet }) => {
-  const { setLitersGoal, moneyGoal, setMoneyGoal } = useContext(GoalContext);
+  const { litersGoal, setLitersGoal, moneyGoal, setMoneyGoal } =
+    useContext(GoalContext);
+
+  const [newGoalSet, setNewGoalSet] = useState(false);
 
   const handleSubmit = (values: MonthlyGoal, {}) => {
+    setNewGoalSet(true);
     if (values.monthlyGoalType === GoalType.Liters) {
       localStorage.setItem(GoalType.Liters, values.monthlyGoalAmount);
       setLitersGoal(values.monthlyGoalAmount);
+
       const forecastedMoney = getForecastedMoney(values, data);
       localStorage.setItem(GoalType.Money, forecastedMoney.toFixed(2));
       setMoneyGoal(forecastedMoney.toFixed(2));
-    } else {
+    } else if (values.monthlyGoalType === GoalType.Money) {
       localStorage.setItem(GoalType.Money, values.monthlyGoalAmount.toString());
       setMoneyGoal(values.monthlyGoalAmount.toString());
-      //do magic
 
-      // TODO
-      const litersFromMoney = Math.random();
-      localStorage.setItem(GoalType.Liters, litersFromMoney.toString());
-      setLitersGoal(litersFromMoney.toString());
+      const forecastedLiters = getForecastedLiters(values, data);
+      localStorage.setItem(GoalType.Liters, forecastedLiters.toFixed(2));
+      setLitersGoal(forecastedLiters.toFixed(2));
     }
   };
 
@@ -123,19 +135,28 @@ export const GoalSetter = ({ data }: { data: DataSet }) => {
               type="text"
               name="monthlyGoalAmount"
               style={{ backgroundColor: "yellow" }}
+              onChange={(values: any) => {
+                setNewGoalSet(false);
+                handleChange(values);
+              }}
             />
             <ErrorMessage name="monthlyGoalAmount" component="div" />
 
             <Button type="submit">Set Goal</Button>
+
+            {newGoalSet && values.monthlyGoalType === GoalType.Liters && (
+              <div>
+                You will spend ~{moneyGoal} EU on water if you stick to your
+                goal!
+              </div>
+            )}
+
+            {newGoalSet && values.monthlyGoalType === GoalType.Money &&  (
+              <div>You should use ~{litersGoal} to hit your budget goal!</div>
+            )}
           </Form>
         )}
       </Formik>
-
-      {moneyGoal && (
-        <div>
-          You will spend ~{moneyGoal} EU on water if you stick to your goal!
-        </div>
-      )}
     </div>
   );
 };
