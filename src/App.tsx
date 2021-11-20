@@ -12,6 +12,7 @@ import { currentMonth, Appliance, Measurement } from "./context/DataContext";
 import { getAverage } from "./utils";
 import { sum } from "lodash";
 import AverageList from "./widgets/AverageList";
+import { GoalSetter } from "./components/GoalSetter";
 
 enum MenuCategory {
   Consumption = "Consumption",
@@ -64,7 +65,7 @@ function App() {
 
   const getTotalConsumption = useMemo(() => {
     return Math.floor(sumBy(getTotalUsageByDeiceData, (x) => x.total));
-  }, [data.houses]);
+  }, [getTotalUsageByDeiceData]);
 
   return (
     <ChakraProvider>
@@ -74,11 +75,10 @@ function App() {
           activeCategory={activeCategory}
           setActiveCategory={setActiveCategory}
         />
+        <GoalSetter data={data} />
         <SpendCard amount={getTotalConsumption} />
         {activeCategory === null && (
-          <>
-            <TotalUsageByDeviceChart data={getTotalUsageByDeiceData} />
-          </>
+          <TotalUsageByDeviceChart data={getTotalUsageByDeiceData} />
         )}
         {activeCategory === MenuCategory.Consumption && (
           <>
