@@ -23,7 +23,7 @@ const AverageList = (props: {
       <HorizontalCard
         customText="Current total water spend per person this month is"
         measurementUnit="liters"
-        amount={+diff.toFixed(2)}
+        amount={isAboveAverage ? +diff.toFixed(2) : +(-diff).toFixed(2)}
         isAboveAverage={isAboveAverage}
         title="test"
       />
