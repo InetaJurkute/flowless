@@ -34,7 +34,10 @@ export const GithubContributionsChart = ({ data }: { data: DataSet }) => {
       processMeasurements
     );
 
-    return Object.entries(dateMap).map((kv) => ({ day: kv[0], value: kv[1] }));
+    return Object.entries(dateMap).map((kv) => ({
+      day: kv[0],
+      value: +kv[1].toFixed(2),
+    }));
   }, [data]);
 
   return (
