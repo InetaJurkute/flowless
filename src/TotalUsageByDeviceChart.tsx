@@ -1,4 +1,4 @@
-import data from "./db.json";
+import data from "./context/db.json";
 import { ResponsiveRadar } from "@nivo/radar";
 import { useMemo } from "react";
 import { sumBy } from "lodash";

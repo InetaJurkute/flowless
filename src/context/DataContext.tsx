@@ -1,6 +1,8 @@
 import React, { createContext } from "react";
 import data from "./db.json";
 
+export const currentDate = '2020-'
+
 export interface Measurement {
   Consumption: string;
   Temp: string;
@@ -18,7 +20,7 @@ export enum KitchenApplience {
 }
 
 export interface ApartmentData {
-  people: number;
+  people: string;
   [KitchenApplience.Shower]: { measurements: Measurement[] };
   [KitchenApplience.KitchenFaucet]: { measurements: Measurement[] };
   [KitchenApplience.Faucet]: { measurements: Measurement[] };
