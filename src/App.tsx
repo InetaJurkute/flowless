@@ -13,14 +13,18 @@ import { getAverage } from "./utils";
 import { sum } from "lodash";
 import AverageList from "./widgets/AverageList";
 import { GoalSetter } from "./components/GoalSetter";
+import { ChallengesPage } from "./pages/ChallengesPage";
+import GoalContext from "./context/GoalContext";
 
 enum MenuCategory {
   Consumption = "Consumption",
   Spend = "Spend",
   Sustainability = "Sustainability",
+  Challenges = "Challenges",
 }
 
 function App() {
+  const [goal, setGoal] = useState(localStorage.getItem("Liters"));
   const data = useContext(DataContext);
 
   const monthData = useMemo(() => {
@@ -68,31 +72,34 @@ function App() {
   }, [getTotalUsageByDeiceData]);
 
   return (
-    <ChakraProvider>
-      <div className="App">
-        <MenuCategoryStrip
-          categories={Object.values(MenuCategory)}
-          activeCategory={activeCategory}
-          setActiveCategory={setActiveCategory}
-        />
-        <GoalSetter data={data} />
-        <SpendCard amount={getTotalConsumption} />
-        {activeCategory === null && (
-          <TotalUsageByDeviceChart data={getTotalUsageByDeiceData} />
-        )}
-        {activeCategory === MenuCategory.Consumption && (
-          <>
-            <UsagePerDayChart data={monthData} />
-            <AverageList
-              monthlySpend={getTotalUsageByDeiceData}
-              averageSpend={monthlyAverages}
-              totalSpend={getTotalConsumption}
-              peopleCount={parseFloat(data.houses[0].apartments[0].people)}
-            />
-          </>
-        )}
-      </div>
-    </ChakraProvider>
+    <GoalContext.Provider value={{ goal, setGoal }}>
+      <ChakraProvider>
+        <div className="App">
+          <MenuCategoryStrip
+            categories={Object.values(MenuCategory)}
+            activeCategory={activeCategory}
+            setActiveCategory={setActiveCategory}
+          />
+          <GoalSetter data={data} />
+          <SpendCard amount={getTotalConsumption} />
+          {activeCategory === null && (
+            <TotalUsageByDeviceChart data={getTotalUsageByDeiceData} />
+          )}
+          {activeCategory === MenuCategory.Consumption && (
+            <>
+              <UsagePerDayChart data={monthData} />
+              <AverageList
+                monthlySpend={getTotalUsageByDeiceData}
+                averageSpend={monthlyAverages}
+                totalSpend={getTotalConsumption}
+                peopleCount={parseFloat(data.houses[0].apartments[0].people)}
+              />
+            </>
+          )}
+          {activeCategory === MenuCategory.Challenges && <ChallengesPage />}
+        </div>
+      </ChakraProvider>
+    </GoalContext.Provider>
   );
 }
 

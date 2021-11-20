@@ -2,12 +2,13 @@ import { Button } from "@chakra-ui/button";
 import {
   Appliance,
   currentDate,
-  currentMonth,
   DataSet,
   Measurement,
 } from "../context/DataContext";
 import { Form, Formik, Field, ErrorMessage } from "formik";
-import { sumBy, sum } from "lodash";
+import { sumBy } from "lodash";
+import { useContext } from "react";
+import GoalContext from "../context/GoalContext";
 
 enum GoalType {
   Liters = "Liters",
@@ -56,29 +57,35 @@ const getAverageHeatingForLiterOfWater = (
   return totalPower / totalLiters;
 };
 
+const getForecastedMoney = (values: MonthlyGoal, data: DataSet) => {
+  const goalLiters = parseInt(values.monthlyGoalAmount);
+
+  const priceForWater = goalLiters * waterLiterPrice;
+  const energyNeededToHeatOneLiter = getAverageHeatingForLiterOfWater(data, 12);
+  const priceHeating =
+    energyNeededToHeatOneLiter * goalLiters * electricityPrice;
+
+  return priceForWater + priceHeating;
+};
+
 export const GoalSetter = ({ data }: { data: DataSet }) => {
+  const { setGoal } = useContext(GoalContext);
+
   const handleSubmit = (values: MonthlyGoal, {}) => {
-    console.log("calculate matching goal", values);
-
-    //all hell breaks loose if form is not validated
     if (values.monthlyGoalType === GoalType.Liters) {
-      const goalLiters = parseInt(values.monthlyGoalAmount);
+      localStorage.setItem(GoalType.Liters, values.monthlyGoalAmount);
+      setGoal(values.monthlyGoalAmount);
 
-      const priceForWater = goalLiters * waterLiterPrice;
-      const energyNeededToHeatOneLiter = getAverageHeatingForLiterOfWater(
-        data,
-        12
-      );
-      const priceHeating =
-        energyNeededToHeatOneLiter * goalLiters * electricityPrice;
+      const forecastedMoney = getForecastedMoney(values, data);
+      console.log("TOTAL PRICE, forecastedMoney", forecastedMoney); // TODO USE
+    } else {
+      //do magic
 
-      console.log("TOTAL PRICE, euro", priceForWater + priceHeating);
+      // TODO
+      const litersFromMoney = Math.random();
+      localStorage.setItem(GoalType.Liters, litersFromMoney.toString());
+      setGoal(litersFromMoney.toString());
     }
-
-    if (values.monthlyGoalType === GoalType.Money) {
-    }
-
-    //save to local state
   };
 
   return (
