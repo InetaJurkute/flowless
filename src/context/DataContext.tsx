@@ -1,8 +1,8 @@
 import { createContext } from "react";
 import data from "./db.json";
-import {DateTime} from "luxon";
+import { DateTime } from "luxon";
 
-export const currentDate = DateTime.now().minus({years: 1});
+export const currentDate = DateTime.now().minus({ years: 1 });
 
 export interface Measurement {
   Consumption: string;
@@ -12,7 +12,7 @@ export interface Measurement {
   TimeStamp: string;
 }
 
-export enum KitchenApplience {
+export enum Applience {
   Shower = "Hydractiva_shower",
   KitchenFaucet = "Kitchen_optima_faucet",
   Faucet = "Optima_faucet",
@@ -23,11 +23,11 @@ export enum KitchenApplience {
 export interface ApartmentData {
   [index: string]: any;
   people: string;
-  [KitchenApplience.Shower]: { measurements: Measurement[] };
-  [KitchenApplience.KitchenFaucet]: { measurements: Measurement[] };
-  [KitchenApplience.Faucet]: { measurements: Measurement[] };
-  [KitchenApplience.Dishwasher]: { measurements: Measurement[] };
-  [KitchenApplience.WashingMachine]: { measurements: Measurement[] };
+  [Applience.Shower]: { measurements: Measurement[] };
+  [Applience.KitchenFaucet]: { measurements: Measurement[] };
+  [Applience.Faucet]: { measurements: Measurement[] };
+  [Applience.Dishwasher]: { measurements: Measurement[] };
+  [Applience.WashingMachine]: { measurements: Measurement[] };
 }
 
 export interface HouseData {
@@ -38,18 +38,43 @@ export interface DataSet {
   houses: HouseData[];
 }
 
-const dataSet = (data as unknown) as DataSet;
-const filteredDataSet: DataSet = {houses: [{apartments: []}]};
-dataSet.houses[0].apartments.forEach(a => {
+export const filterData = (data: DataSet, from?: string, to?: string) => {
+  const filteredDataSet: DataSet = { houses: [{ apartments: [] }] };
+  data.houses[0].apartments.forEach((a) => {
     filteredDataSet.houses[0].apartments.push({
-        ...a,
-        [KitchenApplience.Shower]: {measurements: a[KitchenApplience.Shower].measurements.filter(m => m.TimeStamp < currentDate.toString())},
-        [KitchenApplience.KitchenFaucet]: {measurements: a[KitchenApplience.KitchenFaucet].measurements.filter(m => m.TimeStamp < currentDate.toString())},
-        [KitchenApplience.Faucet]: {measurements: a[KitchenApplience.Faucet].measurements.filter(m => m.TimeStamp < currentDate.toString())},
-        [KitchenApplience.Dishwasher]: {measurements: a[KitchenApplience.Dishwasher].measurements.filter(m => m.TimeStamp < currentDate.toString())},
-        [KitchenApplience.WashingMachine]: {measurements: a[KitchenApplience.WashingMachine].measurements.filter(m => m.TimeStamp < currentDate.toString())}
-    })
-})
+      ...a,
+      [Applience.Shower]: {
+        measurements: a[Applience.Shower].measurements.filter(
+          (m) => (!to || m.TimeStamp <= to) && (!from || m.TimeStamp >= from)
+        ),
+      },
+      [Applience.KitchenFaucet]: {
+        measurements: a[Applience.KitchenFaucet].measurements.filter(
+          (m) => (!to || m.TimeStamp <= to) && (!from || m.TimeStamp >= from)
+        ),
+      },
+      [Applience.Faucet]: {
+        measurements: a[Applience.Faucet].measurements.filter(
+          (m) => (!to || m.TimeStamp <= to) && (!from || m.TimeStamp >= from)
+        ),
+      },
+      [Applience.Dishwasher]: {
+        measurements: a[Applience.Dishwasher].measurements.filter(
+          (m) => (!to || m.TimeStamp <= to) && (!from || m.TimeStamp >= from)
+        ),
+      },
+      [Applience.WashingMachine]: {
+        measurements: a[Applience.WashingMachine].measurements.filter(
+          (m) => (!to || m.TimeStamp <= to) && (!from || m.TimeStamp >= from)
+        ),
+      },
+    });
+  });
+  return filteredDataSet;
+};
+
+const dataSet = data as unknown as DataSet;
+const filteredDataSet = filterData(dataSet, undefined, currentDate.toString());
 
 const DataContext = createContext(filteredDataSet);
 
