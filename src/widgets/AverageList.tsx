@@ -55,7 +55,11 @@ const AverageList = (props: {
             bgColor={nivoIvoryColor}
             customText="Current total water spend per person with your"
             measurementUnit="liters"
-            amount={+cardData[0].diff.toFixed(2)}
+            amount={
+              cardData[0].isAboveAverage
+                ? +cardData[0].diff.toFixed(2)
+                : +(-cardData[0].diff).toFixed(2)
+            }
             isAboveAverage={cardData[0].isAboveAverage}
             title={cardData[0].device}
             subTitle="this month is"
@@ -66,7 +70,11 @@ const AverageList = (props: {
             bgColor={nivoRedColor}
             customText="Current total water spend per person with your"
             measurementUnit="liters"
-            amount={+cardData[1].diff.toFixed(2)}
+            amount={
+              cardData[1].isAboveAverage
+                ? +cardData[1].diff.toFixed(2)
+                : +(-cardData[1].diff).toFixed(2)
+            }
             isAboveAverage={cardData[1].isAboveAverage}
             title={cardData[1].device}
             subTitle="this month is"
@@ -78,7 +86,11 @@ const AverageList = (props: {
             bgColor={nivoYellowColor}
             customText="Current total water spend per person with your"
             measurementUnit="liters"
-            amount={+cardData[2].diff.toFixed(2)}
+            amount={
+              cardData[2].isAboveAverage
+                ? +cardData[2].diff.toFixed(2)
+                : +(-cardData[2].diff).toFixed(2)
+            }
             isAboveAverage={cardData[2].isAboveAverage}
             title={cardData[2].device}
             subTitle="this month is"
@@ -89,7 +101,11 @@ const AverageList = (props: {
             bgColor={nivoOrangeColor}
             customText="Current total water spend per person with your"
             measurementUnit="liters"
-            amount={+cardData[3].diff.toFixed(2)}
+            amount={
+              cardData[3].isAboveAverage
+                ? +cardData[3].diff.toFixed(2)
+                : +(-cardData[3].diff).toFixed(2)
+            }
             isAboveAverage={cardData[3].isAboveAverage}
             title={cardData[3].device}
             subTitle="this month is"
@@ -101,7 +117,11 @@ const AverageList = (props: {
             bgColor={nivoGreenColor}
             customText="Current total water spend per person with your"
             measurementUnit="liters"
-            amount={+cardData[4].diff.toFixed(2)}
+            amount={
+              cardData[4].isAboveAverage
+                ? +cardData[4].diff.toFixed(2)
+                : +(-cardData[4].diff).toFixed(2)
+            }
             isAboveAverage={cardData[4].isAboveAverage}
             title={cardData[4].device}
             subTitle="this month is"
