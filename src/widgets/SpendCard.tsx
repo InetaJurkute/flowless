@@ -1,31 +1,59 @@
-import { useMemo } from "react";
-import { sumBy } from "lodash";
-import { DataSet } from "../context/DataContext";
-import { Box, Heading, Text, Flex, Spacer } from "@chakra-ui/layout";
-import { layoutPropNames } from "@chakra-ui/styled-system";
+import { Box, Heading, Text, Flex } from "@chakra-ui/layout";
+import { blueColor, mediumGrayColor } from "../theme/colors";
 
 interface SpendCardProps {
-    amount: number;
+  amount: number;
+  measurementUnit: string;
+  title: string;
+  goalAmount: number;
+  icon?: React.ReactNode;
+  textColor?: string;
+  bgColor?: string;
 }
 
 export const SpendCard = ({
-    amount,
+  amount,
+  measurementUnit,
+  goalAmount,
+  title,
+  icon,
+  textColor,
+  bgColor,
 }: SpendCardProps) => {
-    return (
-        <Flex maxW="md" borderWidth="1px" borderRadius="lg" overflow="hidden">
-            <Box p="4" bg="red.400">
-                <Heading as="h3" size="lg" display="inline">
-                    {amount} L
-                </Heading>
-                <Text display="inline" fontSize="sm"> spent this month</Text>
-            </Box>
-            <Spacer />
-            <Box p="4" bg="green.400">
-                <Heading as="h3" size="lg">
-                    Under 120 L
-                </Heading>
-                <Text fontSize="sm"> which is your set goal</Text>
-            </Box>
-        </Flex>
-    )
+  return (
+    <Flex
+      height="100%"
+      justifyContent="space-between"
+      boxShadow="base"
+      flexDirection="column"
+      borderRadius="lg"
+      bg={bgColor || mediumGrayColor}
+      color={textColor || blueColor}
+      padding="16px"
+    >
+      <Box>
+        {icon && icon}
+        <Heading as="h2" size="md" margin="16px 0">
+          {title}
+        </Heading>
+      </Box>
+      <Box>
+        <Text fontSize="4xl" fontWeight="regular">
+          {amount} {measurementUnit}
+        </Text>
+      </Box>
+      <Box marginTop="32px">
+        <Text fontSize="sm" fontWeight="regular" display="inline">
+          {`out of `}
+        </Text>
+        <Text fontSize="sm" fontWeight="bold" display="inline">
+          {`${goalAmount} ${measurementUnit}`}
+        </Text>
+        <br />
+        <Text fontSize="sm" fontWeight="regular">
+          which is your set goal
+        </Text>
+      </Box>
+    </Flex>
+  );
 };

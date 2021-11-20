@@ -1,7 +1,5 @@
 import { ResponsiveRadar } from "@nivo/radar";
-import {
-  Appliance,
-} from "./context/DataContext";
+import { Appliance } from "./context/DataContext";
 
 interface TotalUsageByDeviceChartProps {
   data: {
@@ -21,7 +19,7 @@ export const TotalUsageByDeviceChart = ({
         keys={["total"]}
         indexBy="device"
         valueFormat=">-.2f"
-        margin={{ top: 60, right: 80, bottom: 60, left: 80 }}
+        margin={{ top: 60, right: 80, bottom: 120, left: 80 }}
         borderColor={{ from: "color" }}
         gridLabelOffset={24}
         dotSize={10}
@@ -35,7 +33,7 @@ export const TotalUsageByDeviceChart = ({
             anchor: "bottom",
             direction: "column",
             translateX: -50,
-            translateY: -60,
+            translateY: -120,
             itemWidth: 80,
             itemHeight: 20,
             itemTextColor: "#999",

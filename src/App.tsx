@@ -1,18 +1,15 @@
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, Grid, GridItem, Heading } from "@chakra-ui/react";
 import React, { useContext, useMemo, useState } from "react";
-import sumBy from 'lodash/sumBy'
+import sumBy from "lodash/sumBy";
 
 import "./App.css";
 import DataContext, { currentDate, filterData } from "./context/DataContext";
-import { TotalUsageByDeviceChart } from "./TotalUsageByDeviceChart";
 import { UsagePerDayChart } from "./charts/UsagePerDayChart";
-import { MenuCategoryStrip } from "./components/MenuCategoryStrip";
 import { SpendCard } from "./widgets/SpendCard";
-import {
-  currentMonth,
-  Appliance,
-  Measurement,
-} from "./context/DataContext";
+import { currentMonth, Appliance, Measurement } from "./context/DataContext";
+import { WaterIcon } from "./components/icons/WaterIcon";
+import { blueColor, mediumGrayColor } from "./theme/colors";
+import { TotalUsageByDeviceChart } from "./TotalUsageByDeviceChart";
 
 enum MenuCategory {
   Consumption = "Consumption",
@@ -52,19 +49,78 @@ function App() {
   }, [data.houses]);
 
   const getTotalConsumption = useMemo(() => {
-    return Math.floor(sumBy(getTotalUsageByDeiceData, x => x.total))
-  }, [data.houses])
+    return Math.floor(sumBy(getTotalUsageByDeiceData, (x) => x.total));
+  }, [data.houses]);
 
   return (
     <ChakraProvider>
       <div className="App">
-        <MenuCategoryStrip
+        <Heading textAlign="left" as="h1" size="xl" marginBottom="32px">
+          Welcome, <br />
+          here's your dashboard
+        </Heading>
+        {/* <MenuCategoryStrip
           categories={Object.values(MenuCategory)}
           activeCategory={activeCategory}
           setActiveCategory={setActiveCategory}
-        />
-        <SpendCard amount={getTotalConsumption} />
-        {activeCategory === null && <TotalUsageByDeviceChart data={getTotalUsageByDeiceData} />}
+        /> */}
+        <div className="dashboard-wrapper">
+          <div className="flex-bigger">
+            <TotalUsageByDeviceChart data={getTotalUsageByDeiceData} />
+          </div>
+          <div className="flex-small">
+            <Grid
+              gap={4}
+              templateRows="repeat(5, 1fr)"
+              templateColumns="repeat(2, 1fr)"
+            >
+              <GridItem colStart={1} colEnd={2} rowStart={1} rowEnd={4}>
+                <SpendCard
+                  icon={<WaterIcon />}
+                  title="Water Consumption"
+                  amount={getTotalConsumption}
+                  measurementUnit="liters"
+                  goalAmount={120}
+                  bgColor={mediumGrayColor}
+                  textColor={blueColor}
+                />
+              </GridItem>
+              <GridItem colStart={2} colEnd={3} rowStart={1} rowEnd={3}>
+                <SpendCard
+                  icon={<WaterIcon />}
+                  title="Water Consumption"
+                  amount={getTotalConsumption}
+                  measurementUnit="liters"
+                  goalAmount={120}
+                  bgColor={mediumGrayColor}
+                  textColor={blueColor}
+                />
+              </GridItem>
+              <GridItem colStart={1} colEnd={2} rowStart={4} rowEnd={6}>
+                <SpendCard
+                  icon={<WaterIcon />}
+                  title="Water Consumption"
+                  amount={getTotalConsumption}
+                  measurementUnit="liters"
+                  goalAmount={120}
+                  bgColor={mediumGrayColor}
+                  textColor={blueColor}
+                />
+              </GridItem>
+              <GridItem colStart={2} colEnd={3} rowStart={3} rowEnd={6}>
+                <SpendCard
+                  icon={<WaterIcon />}
+                  title="Water Consumption"
+                  amount={getTotalConsumption}
+                  measurementUnit="liters"
+                  goalAmount={120}
+                  bgColor={mediumGrayColor}
+                  textColor={blueColor}
+                />
+              </GridItem>
+            </Grid>
+          </div>
+        </div>
         {activeCategory === MenuCategory.Consumption && (
           <UsagePerDayChart data={monthData} />
         )}

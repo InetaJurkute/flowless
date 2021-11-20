@@ -1,5 +1,42 @@
 .App {
-  text-align: center;
+    margin: 44px 128px;
+}
+
+@media (max-width: 1024px) {
+  .App {
+    margin: 44px 64px;
+  }
+}
+
+@media (max-width: 480px) {
+  .App {
+    margin: 32px 24px;
+  }
+}
+
+.dashboard-wrapper {
+  display: flex;
+}
+
+@media (max-width: 480px) {
+  .dashboard-wrapper {
+    flex-direction: column;
+  }
+}
+
+.flex-small {
+  flex: 1 1 45%;
+}
+
+.flex-bigger {
+  flex: 1 1 65%;
+}
+
+@media (max-width: 480px) {
+  .flex-small,
+  .flex-bigger {
+    flex: 1 1 100%;
+  }
 }
 
 .App-logo {
