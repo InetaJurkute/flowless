@@ -5,7 +5,7 @@ import {
   DataSet,
   Measurement,
 } from "../context/DataContext";
-import { Form, Formik, Field, ErrorMessage, useFormikContext } from "formik";
+import { Form, Formik, Field, ErrorMessage } from "formik";
 import { sumBy } from "lodash";
 import { useContext, useState } from "react";
 import GoalContext from "../context/GoalContext";
@@ -25,9 +25,6 @@ const waterLiterPrice = 1.96 / 1000;
 
 // Finland Household, kWh price: 0.160 EURO
 const electricityPrice = 0.16;
-
-//money needed by liters = liters * price + heating power * price
-//liters needed by money = average heating needed per last 12 months * price + average liters needed per last 12 months * price
 
 const getAverageHeatingForLiterOfWater = (
   data: DataSet,
@@ -57,7 +54,8 @@ const getAverageHeatingForLiterOfWater = (
   return totalPower / totalLiters;
 };
 
-const getForecastedMoney = (values: MonthlyGoal, data: DataSet) => {
+// budget needed for litersGOAL = goalLiters * waterLiterPrice  +  average kWh used per liter * goalLiters * kWh price
+const getForecastedBudget = (values: MonthlyGoal, data: DataSet) => {
   const goalLiters = parseInt(values.monthlyGoalAmount);
 
   const priceForWater = goalLiters * waterLiterPrice;
@@ -68,13 +66,15 @@ const getForecastedMoney = (values: MonthlyGoal, data: DataSet) => {
   return priceForWater + priceHeating;
 };
 
+// priceForOneLiter = average kWh used per liter * kWh price + waterLiterPrice
+// liters needed for budgetGOAL = goalMoney / priceForOneLiter
 const getForecastedLiters = (values: MonthlyGoal, data: DataSet) => {
   const goalMoney = parseInt(values.monthlyGoalAmount);
 
   const energyNeededToHeatOneLiter = getAverageHeatingForLiterOfWater(data, 12);
-  const price = energyNeededToHeatOneLiter * electricityPrice + waterLiterPrice;
+  const priceForOneLiter = energyNeededToHeatOneLiter * electricityPrice + waterLiterPrice;
 
-  return goalMoney / price;
+  return goalMoney / priceForOneLiter;
 };
 
 export const GoalSetter = ({ data }: { data: DataSet }) => {
@@ -89,7 +89,7 @@ export const GoalSetter = ({ data }: { data: DataSet }) => {
       localStorage.setItem(GoalType.Liters, values.monthlyGoalAmount);
       setLitersGoal(values.monthlyGoalAmount);
 
-      const forecastedMoney = getForecastedMoney(values, data);
+      const forecastedMoney = getForecastedBudget(values, data);
       localStorage.setItem(GoalType.Money, forecastedMoney.toFixed(2));
       setMoneyGoal(forecastedMoney.toFixed(2));
     } else if (values.monthlyGoalType === GoalType.Money) {
@@ -151,7 +151,7 @@ export const GoalSetter = ({ data }: { data: DataSet }) => {
               </div>
             )}
 
-            {newGoalSet && values.monthlyGoalType === GoalType.Money &&  (
+            {newGoalSet && values.monthlyGoalType === GoalType.Money && (
               <div>You should use ~{litersGoal} to hit your budget goal!</div>
             )}
           </Form>
