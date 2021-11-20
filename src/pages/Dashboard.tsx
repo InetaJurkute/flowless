@@ -64,7 +64,7 @@ export const Dashboard = ({
                       fontSize={{ base: "sm", md: "md" }}
                       margin="16px 0"
                     >
-                      Set your consumption goals
+                      Set your monthly consumption goals
                     </Heading>
                   </Box>
                   <GoalSetter data={data} />
