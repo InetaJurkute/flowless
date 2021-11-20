@@ -3,6 +3,7 @@ import { DateTime } from "luxon";
 import data from "./db.json";
 
 export const currentDate = DateTime.now().minus({ years: 1 });
+export const currentMonth = currentDate.startOf("month");
 
 export interface Measurement {
   Consumption: string;
