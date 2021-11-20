@@ -1,4 +1,4 @@
-import { ChakraProvider, Grid, GridItem, Heading } from "@chakra-ui/react";
+import { Box, ChakraProvider, Grid, GridItem, Heading } from "@chakra-ui/react";
 import React, { useContext, useMemo, useState } from "react";
 import sumBy from "lodash/sumBy";
 
@@ -14,6 +14,7 @@ import { getAverage } from "./utils";
 import { sum } from "lodash";
 import AverageList from "./widgets/AverageList";
 import { GoalSetter, GoalType } from "./components/GoalSetter";
+import { MenuBar } from "./components/MenuBar";
 import { ChallengesPage } from "./pages/ChallengesPage";
 import GoalContext from "./context/GoalContext";
 import { PowerConsumptionPerDayChart } from "./charts/PowerConsuptionPerDayChart";
@@ -84,6 +85,8 @@ function App() {
     >
       <ChakraProvider>
         <div className="App">
+        <MenuBar/>
+        
           {/* <MenuCategoryStrip
             categories={Object.values(MenuCategory)}
             activeCategory={activeCategory}
