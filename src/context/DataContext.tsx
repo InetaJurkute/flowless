@@ -1,7 +1,7 @@
 import React, { createContext } from "react";
 import data from "./db.json";
 
-export const currentDate = '2020-'
+export const currentDate = "2020-11-15";
 
 export interface Measurement {
   Consumption: string;
@@ -37,7 +37,18 @@ export interface DataSet {
 }
 
 const dataSet = data as DataSet;
+const filteredDataSet: DataSet = {houses: [{apartments: []}]};
+dataSet.houses[0].apartments.forEach(a => {
+    filteredDataSet.houses[0].apartments.push({
+        ...a,
+        [KitchenApplience.Shower]: {measurements: a[KitchenApplience.Shower].measurements.filter(m => m.TimeStamp < currentDate)},
+        [KitchenApplience.KitchenFaucet]: {measurements: a[KitchenApplience.KitchenFaucet].measurements.filter(m => m.TimeStamp < currentDate)},
+        [KitchenApplience.Faucet]: {measurements: a[KitchenApplience.Faucet].measurements.filter(m => m.TimeStamp < currentDate)},
+        [KitchenApplience.Dishwasher]: {measurements: a[KitchenApplience.Dishwasher].measurements.filter(m => m.TimeStamp < currentDate)},
+        [KitchenApplience.WashingMachine]: {measurements: a[KitchenApplience.WashingMachine].measurements.filter(m => m.TimeStamp < currentDate)}
+    })
+})
 
-const DataContext = createContext(dataSet);
+const DataContext = createContext(filteredDataSet);
 
 export default DataContext;
