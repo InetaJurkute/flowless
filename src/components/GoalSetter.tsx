@@ -7,7 +7,7 @@ import {
 } from "../context/DataContext";
 import { Form, Formik, Field, ErrorMessage } from "formik";
 import { sumBy } from "lodash";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import GoalContext from "../context/GoalContext";
 
 export enum GoalType {
@@ -72,7 +72,8 @@ const getForecastedLiters = (values: MonthlyGoal, data: DataSet) => {
   const goalMoney = parseInt(values.monthlyGoalAmount);
 
   const energyNeededToHeatOneLiter = getAverageHeatingForLiterOfWater(data, 12);
-  const priceForOneLiter = energyNeededToHeatOneLiter * electricityPrice + waterLiterPrice;
+  const priceForOneLiter =
+    energyNeededToHeatOneLiter * electricityPrice + waterLiterPrice;
 
   return goalMoney / priceForOneLiter;
 };
