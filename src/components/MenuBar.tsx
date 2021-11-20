@@ -42,7 +42,7 @@ export const MenuBar = () => {
         </Text>
       </Flex>
       <Box>
-        <Button bg="transparent" width="40px">
+        <Button bg="transparent" width="40px" marginRight="8px">
           <BellIcon width="24px" height="24px" />
         </Button>
         <Menu>
