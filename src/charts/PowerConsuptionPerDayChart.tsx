@@ -60,7 +60,7 @@ export const PowerConsumptionPerDayChart = ({ data }: { data: DataSet }) => {
 
   return (
     <div className="responsive-chart-wrapper">
-      <h3>Power Consumption Per Day By Device This Month(kwH)</h3>
+      <h3>Power Consumption Per Day By Device This Month(kWh)</h3>
       <ResponsiveBar
         data={chartData}
         keys={Object.values(Appliance)}
