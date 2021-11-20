@@ -29,8 +29,7 @@ export const Dashboard = ({
       <MenuBar />
       <GoalSetter data={data} />
       <Heading textAlign="left" as="h1" size="xl" marginBottom="32px">
-        Welcome, <br />
-        here's your dashboard
+      До́брый ве́чер ( ͡° ͜ʖ ͡°)
       </Heading>
       <div className="dashboard-wrapper">
         <div className="flex-bigger">
