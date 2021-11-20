@@ -1,5 +1,6 @@
 import { Grid, GridItem, Heading } from "@chakra-ui/layout";
 import { useContext } from "react";
+import { useNavigate } from "react-router";
 import { GithubContributionsChart } from "../charts/GithubContributionsChart";
 import { GoalSetter } from "../components/GoalSetter";
 import { WaterIcon } from "../components/icons/WaterIcon";
@@ -19,6 +20,7 @@ export const Dashboard = ({
   getTotalConsumption: any;
 }) => {
   const { litersGoal } = useContext(GoalContext);
+  const navigate = useNavigate();
   return (
     <>
       <GoalSetter data={data} />
@@ -46,7 +48,7 @@ export const Dashboard = ({
                 goalAmount={Number(litersGoal)}
                 bgColor={mediumGrayColor}
                 textColor={blueColor}
-                //onClick={() => setActiveCategory(MenuCategory.Consumption)}
+                onClick={() => navigate("/flowless/consumption")}
               />
             </GridItem>
             <GridItem colStart={2} colEnd={3} rowStart={1} rowEnd={3}>
@@ -58,7 +60,7 @@ export const Dashboard = ({
                 goalAmount={120}
                 bgColor={mediumGrayColor}
                 textColor={blueColor}
-                //onClick={() => setActiveCategory(MenuCategory.Sustainability)}
+                onClick={() => navigate("/flowless/power")}
               />
             </GridItem>
             <GridItem colStart={1} colEnd={2} rowStart={4} rowEnd={6}>
@@ -70,7 +72,7 @@ export const Dashboard = ({
                 goalAmount={120}
                 bgColor={mediumGrayColor}
                 textColor={blueColor}
-                //onClick={() => setActiveCategory(MenuCategory.Spend)}
+                onClick={() => navigate("/flowless/spend")}
               />
             </GridItem>
             <GridItem colStart={2} colEnd={3} rowStart={3} rowEnd={6}>
@@ -82,7 +84,7 @@ export const Dashboard = ({
                 goalAmount={120}
                 bgColor={mediumGrayColor}
                 textColor={blueColor}
-                //onClick={() => setActiveCategory(MenuCategory.Challenges)}
+                onClick={() => navigate("/flowless/challenges")}
               />
             </GridItem>
           </Grid>
