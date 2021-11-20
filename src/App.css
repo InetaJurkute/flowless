@@ -1,15 +1,15 @@
-.App {
+.app {
     margin: 44px 128px;
 }
 
 @media (max-width: 1024px) {
-  .App {
+  .app {
     margin: 44px 64px;
   }
 }
 
 @media (max-width: 480px) {
-  .App {
+  .app {
     margin: 32px 24px;
   }
 }

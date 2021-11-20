@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/modal";
 import { ChallengeCard } from "../widgets/ChallengeCard";
 import { Link } from "react-router-dom";
+import { MenuBar } from "../components/MenuBar";
 
 export const ChallengesPage = () => {
   const [selectedChallenge, setSelectedChallenge] = useState<string | null>(
@@ -90,53 +91,56 @@ export const ChallengesPage = () => {
 
   return (
     <>
-      <Heading>Your Challenges</Heading>
-      <Stack spacing={8}>{mapChallenges(yourChallenges)}</Stack>
-      <Heading>All Challenges</Heading>
-      <Heading as="h3" size="lg">
-        Daily
-      </Heading>
-      <Stack spacing={8}>{mapChallenges(dailyChallenges)}</Stack>
-      <Heading as="h3" size="lg">
-        Monthly
-      </Heading>
-      <Stack spacing={8}>{mapChallenges(monthlyChallenges)}</Stack>
-      <Link to="/flowless">Back</Link>
+      <MenuBar />
+      <div className="app">
+        <Heading>Your Challenges</Heading>
+        <Stack spacing={8}>{mapChallenges(yourChallenges)}</Stack>
+        <Heading>All Challenges</Heading>
+        <Heading as="h3" size="lg">
+          Daily
+        </Heading>
+        <Stack spacing={8}>{mapChallenges(dailyChallenges)}</Stack>
+        <Heading as="h3" size="lg">
+          Monthly
+        </Heading>
+        <Stack spacing={8}>{mapChallenges(monthlyChallenges)}</Stack>
+        <Link to="/flowless">Back</Link>
 
-      <Modal
-        isOpen={Boolean(selectedChallenge)}
-        onClose={() => setSelectedChallenge(null)}
-      >
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>
-            {selectedChallenge && allChallenges[selectedChallenge].title}
-          </ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <Text>
-              {selectedChallenge && allChallenges[selectedChallenge].desc}
-            </Text>
-            <Text>
-              {selectedChallenge && allChallenges[selectedChallenge].progress}
-            </Text>
-            {selectedChallenge &&
-              allChallenges[selectedChallenge].nonStarted && (
-                <Button colorScheme="green">Start</Button>
-              )}
-          </ModalBody>
+        <Modal
+          isOpen={Boolean(selectedChallenge)}
+          onClose={() => setSelectedChallenge(null)}
+        >
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>
+              {selectedChallenge && allChallenges[selectedChallenge].title}
+            </ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <Text>
+                {selectedChallenge && allChallenges[selectedChallenge].desc}
+              </Text>
+              <Text>
+                {selectedChallenge && allChallenges[selectedChallenge].progress}
+              </Text>
+              {selectedChallenge &&
+                allChallenges[selectedChallenge].nonStarted && (
+                  <Button colorScheme="green">Start</Button>
+                )}
+            </ModalBody>
 
-          <ModalFooter>
-            <Button
-              colorScheme="blue"
-              mr={3}
-              onClick={() => setSelectedChallenge(null)}
-            >
-              Close
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+            <ModalFooter>
+              <Button
+                colorScheme="blue"
+                mr={3}
+                onClick={() => setSelectedChallenge(null)}
+              >
+                Close
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+      </div>
     </>
   );
 };
