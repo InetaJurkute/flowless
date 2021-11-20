@@ -22,7 +22,7 @@ export enum Appliance {
 }
 
 export interface ApartmentData {
-  [index: string]: any;
+  [index: string]: { measurements: Measurement[] } | string;
   people: string;
   [Appliance.Shower]: { measurements: Measurement[] };
   [Appliance.KitchenFaucet]: { measurements: Measurement[] };

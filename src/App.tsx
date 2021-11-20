@@ -17,6 +17,7 @@ import { GoalSetter, GoalType } from "./components/GoalSetter";
 import { ChallengesPage } from "./pages/ChallengesPage";
 import GoalContext from "./context/GoalContext";
 import { PowerConsumptionPerDayChart } from "./charts/PowerConsuptionPerDayChart";
+import { GithubContributionsChart } from './charts/GithubContributionsChart'
 
 enum MenuCategory {
   Consumption = "Consumption",
@@ -97,6 +98,7 @@ function App() {
           <div className="dashboard-wrapper">
             <div className="flex-bigger">
               <TotalUsageByDeviceChart data={getTotalUsageByDeiceData} />
+              <GithubContributionsChart data={data} />
             </div>
             <div className="flex-small">
               <Grid
