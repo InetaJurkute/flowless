@@ -9,6 +9,8 @@ import { Form, Formik, Field, ErrorMessage } from "formik";
 import { sumBy } from "lodash";
 import { useContext, useState } from "react";
 import GoalContext from "../context/GoalContext";
+import { Select } from "@chakra-ui/select";
+import { Stack } from "@chakra-ui/layout";
 
 export enum GoalType {
   Liters = "Liters",
@@ -115,35 +117,36 @@ export const GoalSetter = ({ data }: { data: DataSet }) => {
       >
         {({ values, handleChange, handleBlur }) => (
           <Form>
-            <select
-              name="monthlyGoalType"
-              value={values.monthlyGoalType}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            >
-              <option value="" label="Select a type" />
-              <option
-                value={GoalType.Liters.toString()}
-                label={GoalType.Liters.toString()}
-              />
-              <option
-                value={GoalType.Money.toString()}
-                label={GoalType.Money.toString()}
-              />
-            </select>
+            <Stack spacing={3}>
+              <Select
+                name="monthlyGoalType"
+                value={values.monthlyGoalType}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              >
+                <option
+                  value={GoalType.Liters.toString()}
+                  label={GoalType.Liters.toString()}
+                />
+                <option
+                  value={GoalType.Money.toString()}
+                  label={GoalType.Money.toString()}
+                />
+              </Select>
 
-            <Field
-              type="text"
-              name="monthlyGoalAmount"
-              style={{ backgroundColor: "yellow" }}
-              onChange={(values: any) => {
-                setNewGoalSet(false);
-                handleChange(values);
-              }}
-            />
-            <ErrorMessage name="monthlyGoalAmount" component="div" />
+              <Field
+                type="text"
+                name="monthlyGoalAmount"
+                style={{ backgroundColor: "yellow" }}
+                onChange={(values: any) => {
+                  setNewGoalSet(false);
+                  handleChange(values);
+                }}
+              />
+              <ErrorMessage name="monthlyGoalAmount" component="div" />
 
-            <Button type="submit">Set Goal</Button>
+              <Button type="submit">Set Goal</Button>
+            </Stack>
 
             {newGoalSet && values.monthlyGoalType === GoalType.Liters && (
               <div>
