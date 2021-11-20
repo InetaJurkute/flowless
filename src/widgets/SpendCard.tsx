@@ -7,7 +7,7 @@ interface SpendCardProps {
 }
 
 export const SpendCard = ({ amount }: SpendCardProps) => {
-  const { goal } = useContext(GoalContext);
+  const { litersGoal } = useContext(GoalContext);
   return (
     <Flex maxW="md" borderWidth="1px" borderRadius="lg" overflow="hidden">
       <Box p="4" bg="red.400">
@@ -22,9 +22,9 @@ export const SpendCard = ({ amount }: SpendCardProps) => {
       <Spacer />
       <Box p="4" bg="green.400">
         <Heading as="h3" size="lg">
-          {goal ? <>Under {goal}L</> : <>No goal set</>}
+          {litersGoal ? <>Under {litersGoal}L</> : <>No goal set</>}
         </Heading>
-        {goal && <Text fontSize="sm"> which is your set goal</Text>}
+        {litersGoal && <Text fontSize="sm"> which is your set goal</Text>}
       </Box>
     </Flex>
   );

@@ -12,7 +12,7 @@ import { currentMonth, Appliance, Measurement } from "./context/DataContext";
 import { getAverage } from "./utils";
 import { sum } from "lodash";
 import AverageList from "./widgets/AverageList";
-import { GoalSetter } from "./components/GoalSetter";
+import { GoalSetter, GoalType } from "./components/GoalSetter";
 import { ChallengesPage } from "./pages/ChallengesPage";
 import GoalContext from "./context/GoalContext";
 
@@ -24,7 +24,12 @@ enum MenuCategory {
 }
 
 function App() {
-  const [goal, setGoal] = useState(localStorage.getItem("Liters"));
+  const [litersGoal, setLitersGoal] = useState(
+    localStorage.getItem(GoalType.Liters)
+  );
+  const [moneyGoal, setMoneyGoal] = useState(
+    localStorage.getItem(GoalType.Money)
+  );
   const data = useContext(DataContext);
 
   const monthData = useMemo(() => {
@@ -72,7 +77,9 @@ function App() {
   }, [getTotalUsageByDeiceData]);
 
   return (
-    <GoalContext.Provider value={{ goal, setGoal }}>
+    <GoalContext.Provider
+      value={{ litersGoal, setLitersGoal, moneyGoal, setMoneyGoal }}
+    >
       <ChakraProvider>
         <div className="App">
           <MenuCategoryStrip
