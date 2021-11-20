@@ -22,7 +22,7 @@ export const Dashboard = ({
   getTotalPowerConsumption: any;
   getTotalConsumption: any;
 }) => {
-  const { litersGoal, powerGoal } = useContext(GoalContext);
+  const { litersGoal, powerGoal, moneyGoal } = useContext(GoalContext);
   const navigate = useNavigate();
   return (
     <>
@@ -60,7 +60,7 @@ export const Dashboard = ({
               <GridItem colStart={2} colEnd={3} rowStart={1} rowEnd={3}>
                 <SpendCard
                   icon={<WaterIcon />}
-                  title="Power and Sustainability"
+                  title="Energy and Sustainability"
                   amount={getTotalPowerConsumption}
                   measurementUnit="kWh"
                   goalAmount={Number(powerGoal)}
@@ -73,15 +73,15 @@ export const Dashboard = ({
                 <SpendCard
                   icon={<WaterIcon />}
                   title="Spend"
-                  amount={getTotalConsumption}
-                  measurementUnit="liters"
-                  goalAmount={120}
+                  amount={22}
+                  measurementUnit="EUR"
+                  goalAmount={Number(moneyGoal)}
                   bgColor={mediumGrayColor}
                   textColor={blueColor}
                   onClick={() => navigate("/flowless/spend")}
                 />
               </GridItem>
-              <GridItem colStart={2} colEnd={3} rowStart={3} rowEnd={6}>
+              <GridItem colStart={2} colEnd={3} rowStart={3} rowEnd={5}>
                 <SpendCard
                   icon={<WaterIcon />}
                   title="Challenges"
@@ -90,6 +90,20 @@ export const Dashboard = ({
                   goalAmount={120}
                   bgColor={mediumGrayColor}
                   textColor={blueColor}
+                  hideContent={true}
+                  onClick={() => navigate("/flowless/challenges")}
+                />
+              </GridItem>
+              <GridItem colStart={2} colEnd={3} rowStart={5} rowEnd={6}>
+                <SpendCard
+                  icon={<WaterIcon />}
+                  title="Challenges"
+                  amount={getTotalConsumption}
+                  measurementUnit="liters"
+                  goalAmount={120}
+                  bgColor={mediumGrayColor}
+                  textColor={blueColor}
+                  hideContent={true}
                   onClick={() => navigate("/flowless/challenges")}
                 />
               </GridItem>
