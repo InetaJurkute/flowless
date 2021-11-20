@@ -1,11 +1,12 @@
-import React from "react";
-import data from "./db.json";
+import React, { useContext } from "react";
 
 import logo from "./logo.svg";
 import "./App.css";
+import DataContext from "./context/DataContext";
 
 function App() {
-  console.log("data stuff", (data as any).houses.length);
+  const data = useContext(DataContext);
+  console.log("data stuff", data.houses[0].apartments);
 
   return (
     <div className="App">
