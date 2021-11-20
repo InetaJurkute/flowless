@@ -10,6 +10,7 @@ import GoalContext from "../context/GoalContext";
 import { blueColor, mediumGrayColor } from "../theme/colors";
 import { AppliancePie } from "../charts/AppliancePie";
 import { SpendCard } from "../widgets/SpendCard";
+import { EnergyIcon } from "../components/icons/EnergyIcon";
 
 export const Dashboard = ({
   data,
@@ -60,7 +61,7 @@ export const Dashboard = ({
               </GridItem>
               <GridItem colStart={2} colEnd={3} rowStart={1} rowEnd={3}>
                 <SpendCard
-                  icon={<WaterIcon />}
+                  icon={<EnergyIcon />}
                   title="Energy and Sustainability"
                   amount={getTotalPowerConsumption}
                   measurementUnit="kWh"
