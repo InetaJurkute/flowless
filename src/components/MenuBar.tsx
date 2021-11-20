@@ -31,7 +31,7 @@ return (<div>
     <Button bg="red">
         <BellIcon/>
     </Button>
-    Flawless
+    FlOwless
   </Menu>
   </Box></div>)
 };

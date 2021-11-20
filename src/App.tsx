@@ -1,6 +1,7 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import React, { useContext, useMemo, useState } from "react";
 import sumBy from "lodash/sumBy";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import "./App.css";
 import DataContext, { currentDate, filterData } from "./context/DataContext";
@@ -11,9 +12,10 @@ import { GoalType } from "./components/GoalSetter";
 import { ChallengesPage } from "./pages/ChallengesPage";
 import GoalContext from "./context/GoalContext";
 import { PowerConsumptionPerDayChart } from "./charts/PowerConsuptionPerDayChart";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Dashboard } from "./pages/Dashboard";
 import { ConsumptionPage } from "./pages/ConsumptionPage";
+import { labelMap } from "./applianceLabel";
+import { AverageSpend } from "./widgets/AverageList";
 
 function App() {
   const [litersGoal, setLitersGoal] = useState(
@@ -33,16 +35,25 @@ function App() {
   }, [data]);
 
   const applianceAverages = {
-    [Appliance.Dishwasher]: getAverage(monthData, Appliance.Dishwasher),
-    [Appliance.Faucet]: getAverage(monthData, Appliance.Faucet),
-    [Appliance.KitchenFaucet]: getAverage(monthData, Appliance.KitchenFaucet),
-    [Appliance.Shower]: getAverage(monthData, Appliance.Shower),
-    [Appliance.WashingMachine]: getAverage(monthData, Appliance.WashingMachine),
+    [labelMap.get(Appliance.Dishwasher)!]: getAverage(
+      monthData,
+      Appliance.Dishwasher
+    ),
+    [labelMap.get(Appliance.Faucet)!]: getAverage(monthData, Appliance.Faucet),
+    [labelMap.get(Appliance.KitchenFaucet)!]: getAverage(
+      monthData,
+      Appliance.KitchenFaucet
+    ),
+    [labelMap.get(Appliance.Shower)!]: getAverage(monthData, Appliance.Shower),
+    [labelMap.get(Appliance.WashingMachine)!]: getAverage(
+      monthData,
+      Appliance.WashingMachine
+    ),
   };
   const monthlyAverages = {
     ...applianceAverages,
     Total: sum(Object.values(applianceAverages)),
-  };
+  } as AverageSpend;
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
   const getTotalUsageByDeiceData = useMemo(() => {
@@ -54,7 +65,7 @@ function App() {
         (m) => m.TimeStamp >= currentMonth.toString()
       );
       return {
-        device,
+        device: labelMap.get(device)!,
         total: sumBy(myMeasurements, (x) =>
           parseFloat((x as Measurement).Consumption)
         ),

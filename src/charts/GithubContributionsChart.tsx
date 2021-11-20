@@ -4,6 +4,7 @@ import {
     DataSet,
     Measurement,
 } from "../context/DataContext";
+import { flowless } from "./theme";
 
 export const GithubContributionsChart = ({ data }: { data: DataSet }) => {
     const dataForChart = useMemo(() => {
@@ -43,6 +44,7 @@ export const GithubContributionsChart = ({ data }: { data: DataSet }) => {
                 monthBorderColor="#ffffff"
                 dayBorderWidth={2}
                 dayBorderColor="#ffffff"
+                theme={flowless}
                 legends={[
                     {
                         anchor: 'bottom-right',

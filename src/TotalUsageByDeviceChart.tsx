@@ -1,9 +1,10 @@
 import { ResponsiveRadar } from "@nivo/radar";
-import { Appliance } from "./context/DataContext";
+import { ApplianceLabel } from "./applianceLabel";
+import { flowless } from "./charts/theme";
 
 interface TotalUsageByDeviceChartProps {
   data: {
-    device: Appliance;
+    device: ApplianceLabel;
     total: number;
   }[];
 }
@@ -28,6 +29,8 @@ export const TotalUsageByDeviceChart = ({
         colors={{ scheme: "nivo" }}
         blendMode="multiply"
         motionConfig="wobbly"
+        enableDotLabel={true}
+        theme={flowless}
         legends={[
           {
             anchor: "bottom",
