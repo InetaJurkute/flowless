@@ -173,6 +173,7 @@ export const GoalSetter = ({ data }: { data: DataSet }) => {
                 type="submit"
                 backgroundColor={purpleMainColor}
                 color={backgroundColor}
+                _hover={{ filter: "brightness(0.9)" }}
               >
                 Set Goal
               </Button>
