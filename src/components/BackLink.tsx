@@ -12,8 +12,7 @@ export const BackLink = () => {
       rounded="md"
       style={{
         marginTop: "10px",
-        display: "block",
-        maxWidth: "64px",
+        display: "inline-flex",
       }}
     >
       Back
