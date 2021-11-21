@@ -12,11 +12,7 @@ import GoalContext from "../context/GoalContext";
 import { Select } from "@chakra-ui/select";
 import { Stack } from "@chakra-ui/layout";
 import { Input } from "@chakra-ui/input";
-import {
-  FormControl,
-  FormErrorMessage,
-  FormLabel,
-} from "@chakra-ui/form-control";
+import { FormControl, FormErrorMessage } from "@chakra-ui/form-control";
 import { backgroundColor, purpleMainColor } from "../theme/colors";
 
 export enum GoalType {

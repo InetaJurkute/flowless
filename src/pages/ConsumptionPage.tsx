@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { UsagePerDayChart } from "../charts/UsagePerDayChart";
 import { BackLink } from "../components/BackLink";
 import { MenuBar } from "../components/MenuBar";

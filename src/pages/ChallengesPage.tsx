@@ -11,7 +11,6 @@ import {
   ModalFooter,
 } from "@chakra-ui/modal";
 import { ChallengeCard } from "../widgets/ChallengeCard";
-import { Link } from "react-router-dom";
 import { MenuBar } from "../components/MenuBar";
 import { BackLink } from "../components/BackLink";
 import { blueColor } from "../theme/colors";
