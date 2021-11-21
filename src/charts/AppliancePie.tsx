@@ -52,7 +52,7 @@ export const AppliancePie = ({ data }: AppliancePieProps) => {
         arcLinkLabelsThickness={2}
         arcLinkLabelsColor={{ from: "color" }}
         arcLabelsSkipAngle={10}
-        arcLabelsTextColor={{ from: "color", modifiers: [["brighter", 2]] }}
+        arcLabelsTextColor={blueColor}
         valueFormat=" >-.2f"
       />
     </div>

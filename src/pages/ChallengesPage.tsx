@@ -14,6 +14,7 @@ import { ChallengeCard } from "../widgets/ChallengeCard";
 import { Link } from "react-router-dom";
 import { MenuBar } from "../components/MenuBar";
 import { BackLink } from "../components/BackLink";
+import { blueColor } from "../theme/colors";
 
 export const ChallengesPage = () => {
   const [selectedChallenge, setSelectedChallenge] = useState<string | null>(
@@ -94,17 +95,35 @@ export const ChallengesPage = () => {
     <>
       <MenuBar />
       <div className="app">
-        <Heading>Your Challenges</Heading>
+        <Heading as="h2" marginBottom="24px" size="lg" color={blueColor}>
+          Your Challenges
+        </Heading>
         <Stack spacing={8}>{mapChallenges(yourChallenges)}</Stack>
-        <Heading>All Challenges</Heading>
-        <Heading as="h3" size="lg">
+        <Heading as="h2" margin="24px 0 0" size="lg" color={blueColor}>
+          All Challenges
+        </Heading>
+        <Heading
+          as="h3"
+          margin="16px 0"
+          size="md"
+          fontWeight="bold"
+          color={blueColor}
+        >
           Daily
         </Heading>
         <Stack spacing={8}>{mapChallenges(dailyChallenges)}</Stack>
-        <Heading as="h3" size="lg">
+        <Heading
+          as="h3"
+          margin="16px 0"
+          size="md"
+          fontWeight="bold"
+          color={blueColor}
+        >
           Monthly
         </Heading>
-        <Stack spacing={8}>{mapChallenges(monthlyChallenges)}</Stack>
+        <Stack marginBottom="48px" spacing={8}>
+          {mapChallenges(monthlyChallenges)}
+        </Stack>
         <BackLink />
 
         <Modal
